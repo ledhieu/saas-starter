@@ -1,0 +1,1 @@
+{"query":"query { liteLocation(id: 1) { id name } }"}

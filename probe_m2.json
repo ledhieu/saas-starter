@@ -1,0 +1,1 @@
+{"query":"query { business(id: 1) { id } }"}

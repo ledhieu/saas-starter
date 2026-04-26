@@ -1,0 +1,1 @@
+{"query":"query { locations { edges { node { id name } } } }"}

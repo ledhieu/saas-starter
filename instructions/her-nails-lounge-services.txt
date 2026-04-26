@@ -1,0 +1,123 @@
+Her Nails Lounge — 1367 Richards St, Vancouver
+Source: https://www.fresha.com/graphql (BookingFlow_Initialize_Mutation, sha256 12ae5c77089f934aa88e3e1805176329eaed4d91b36f54df357c7c8f1638ac21)
+Captured: 2026-04-25T06:22:28.785Z
+
+=== Manicure ===
+- Builder Gel Overlay/BIAB  |  1 giờ, 15 phút - 1 giờ, 20 phút  |  66 CA$
+    A SOFT gel builder service enhances natural nails by adding gel overlays. The gel has a flexible texture, providing the ideal hardness to protect natural nails. This service includes cuticle cleaning, nail cutting and shaping, builder gel overlays/BIAB, gel polish application). Best for short, natural nails (less than 5mm from fingertips).
+- Signature Manicure   |  50 phút - 1 giờ  |  từ 38 CA$
+    Our Signature Gel Manicure includes nail cleaning, cuticle care, shaping ,base coat, polish application, top coat, hands massage, hot towel
+- Express Manicure  |  35 phút - 45 phút  |  từ 33 CA$
+    An Express Gel Pedicure is a quick treatment that includes basic nail care, nails trimming & shaping, cuticles trimming, and polish application. It’s ideal for a fast refresh. Perfect for a speedy touch-up!
+- Spa Manicure  |  1 giờ - 1 giờ, 10 phút  |  từ 52 CA$
+    Our Spa Manicure includes hands soaking in epsom salt bath, cuticle care, nail shaping, scrubbing, collagen mud mask, nourishing lotion massages, hot towel, polish application.
+- Gel Builder (add-on)  |  30 phút  |  20 CA$
+    Adding builder gel on natural nails. This is an add on service (not include cuticle cleaning and color) usually pair with manicure
+
+=== Pedicure ===
+- Deluxe Pedicure - Gel Polish (Removal included)  |  1 giờ, 10 phút  |  từ 76 CA$
+    Our Deluxe Gel Pedicure offers a luxurious experience, including your choice of scent for foot bath, scrub, callus removal, longer moisturizing massage, hot rocks massage, hot towel, gel polish application.
+- Deluxe Pedicure (Regular Polish/No Polish)  |  1 giờ, 10 phút  |  từ 66 CA$
+    Our Deluxe Gel Pedicure offers a luxurious experience, including your choice of scent for foot bath, scrub, callus removal, longer moisturizing massage, hot rocks massage, hot towel, regular polish application.
+- Express Pedicure  |  30 phút - 45 phút  |  từ 40 CA$
+    An Express Gel Pedicure is a quick treatment that includes soaking, along with basic nail care, nails trimming & shaping, cuticles trimming, feet scrub and polish application. It’s ideal for a fast refresh. Perfect for a speedy touch-up!
+- Signature Pedicure  |  45 phút - 55 phút  |  từ 48 CA$
+    Our Signature Gel polish Pedicure offers a luxurious experience, including soaking, nail care, feet scrub, callus removal (optional), moisturizing massage, hot rocks massage, polish application, hot towel.
+
+=== Combo ===
+- Signature Manicure & Pedicure   |  1 giờ, 45 phút - 2 giờ  |  từ 84 CA$
+    Our Signature Mani and Pedi combo include nail cleaning, cuticle care, callus removal, cutting, shaping ,base coat, polish application, top coat, hands and feet massage, hot towel
+- Express Manicure & Pedicure    |  1 giờ, 15 phút - 1 giờ, 30 phút  |  từ 73 CA$
+    Our Express Mani & Pedi combo includes nail cleaning, cuticle care, cutting, shaping ,base coat, polish application, top coat.
+
+=== Gel-X Extension ===
+- Gel X removal (free with new set of GEL-X only)  |  20 phút  |  miễn phí
+    We offer complimentary Gel-X removal when you're getting a new Gel X set, as long as the original application was done at our salon. Standard removal fees apply for sets done elsewhere.
+- Gel X Extension   |  1 giờ, 15 phút - 1 giờ, 45 phút  |  từ 79 CA$
+    Cuticles trim, Gel X application ,Gel polish.
+
+=== Gel Extension ===
+- Dual Form Gel Extension  |  1 giờ, 30 phút - 1 giờ, 50 phút  |  từ 85 CA$
+    A nail enhancement technique that builds extensions using pre-shaped molds and hard gel. It gives a smooth, natural look with strong, even length and consistent shape—perfect for quick, flawless nail sets.
+- Dual Form Gel - Fill  |  1 giờ, 35 phút - 1 giờ, 50 phút  |  từ 75 CA$
+    A nail enhancement technique that builds extensions using pre-shaped molds and hard gel. It gives a smooth, natural look with strong, even length and consistent shape—perfect for quick, flawless nail sets.
+- Hard Gel Extension - Full Set  |  1 giờ, 30 phút - 1 giờ, 45 phút  |  từ 79 CA$
+    A hand-sculpted nail enhancement made by applying and shaping HARD gel directly on the nail, then curing under a UV/LED lamp. It offers strong, long-lasting results with a natural, customizable shape and smooth finish.
+- Hard Gel Extension - Fill   |  1 giờ, 15 phút - 1 giờ, 50 phút  |  từ 68 CA$
+    A hand-sculpted nail enhancement made by applying and shaping HARD gel directly on the nail, then curing under a UV/LED lamp. It offers strong, long-lasting results with a natural, customizable shape and smooth finish.
+
+=== Add On ===
+- Ombre   |  25 phút - 1 giờ  |  từ 15 CA$
+- Color Change on extentions  |  35 phút  |  40 CA$
+- Nail Hardener  |  5 phút  |  5 CA$
+    Add on layer of strengthening gel over gel color, cannot be refilled like hard gel or builder gel
+- Removal  |  10 phút - 35 phút  |  từ 5 CA$
+- Paraffin Wax   |  15 phút  |  16 CA$
+- Nail Arts/Designs  |  20 phút - 1 giờ, 10 phút  |  từ 15 CA$
+    From $15 and plus, the price varies based on your design. Please message us inspo photos on Instagram before coming in to ensure enough time for the nail arts!
+- Nail Fix  |  10 phút - 15 phút  |  từ 5 CA$
+- French   |  15 phút - 40 phút  |  từ 15 CA$
+- Cat Eyes  |  15 phút  |  từ 15 CA$
+- Chrome   |  10 phút  |  từ 15 CA$
+- Extra 10 Minute Massage  |  10 phút  |  15 CA$
+- Regular Polish Change  |  30 phút  |  từ 25 CA$
+- Gel Polish Color Change   |  35 phút  |  từ 35 CA$
+    Include removal old polish, cut, reshape and apply new polish
+- Gel Polish Color Change (nails with extension)  |  45 phút  |  40 CA$
+
+=== For Little Cuties (Under 12) ===
+- Manicure for kid with gel polish  |  45 phút  |  36 CA$
+- Pedicure for kid with gel polish  |  45 phút  |  46 CA$
+- Pedicure For Kid With Regular Polish  |  35 phút  |  36 CA$
+- Manicure For Kid With Regular Polish  |  30 phút  |  26 CA$
+
+=== Waxing + Tinting ===
+- Lip Wax  |  20 phút  |  18 CA$
+- Chin Waxing  |  15 phút  |  18 CA$
+- Eyebrows Waxing  |  20 phút  |  20 CA$
+- Eyebrow Tinting   |  20 phút  |  25 CA$
+- Eyebrow Waxing + Tinting Combo  |  30 phút  |  45 CA$
+
+=== Eyelash Extension ===
+- Quick Lash Fill  |  40 phút  |  từ 45 CA$
+    Available within 10 days of your last visit with 60-70% lashes remaining. Extra charge or rebook may apply if more lashes are missing
+- Anime Lash Lift + Tint  |  1 giờ, 10 phút  |  85 CA$
+    Design lash lift to mimic the dramatic, wide-eyed appearance often seen in anime characters. It's a beauty treatment that enhances the lashes by lifting and curling them upward but with a special rods and technique to emphasizes big, open, doll eyes.
+- Korean Lash Lift   |  1 giờ  |  75 CA$
+- Korean Lash Lift+ Tint  |  1 giờ  |  85 CA$
+    Enhance your natural lashes with a gentle lift and a deep tint for added curl, volume, and definition—no extensions needed
+- YY / W Lash Half Set  |  1 giờ, 30 phút  |  100 CA$
+    50% coverage
+- YY / W Half Fill  |  1 giờ  |  70 CA$
+- YY / W Lash Full Set  |  1 giờ, 15 phút  |  120 CA$
+    W Lashes, known for their W-shaped design and bold volume, are becoming a popular choice for clients who want dramatic lash lines look similar to a light volume set.
+- YY / W Full Fill  |  1 giờ, 15 phút  |  85 CA$
+- Design Lash Style   |  2 giờ  |  từ 130 CA$
+    Angel set, Medusa, Fairy or Manhua style
+- Anime Fill  |  1 giờ, 30 phút  |  95 CA$
+    Must be book within 2-3 Weeks from the day of the appointment
+- Classic full set  |  1 giờ, 30 phút  |  115 CA$
+    A natural, timeless look with one extension applied to each natural lash for subtle length and definition.
+- Classic fill  |  1 giờ, 30 phút  |  80 CA$
+    Maintain your classic lash look with a refresh of lost or grown-out extensions. Recommended every 2–3 weeks to keep your lashes looking full and flawless. Must have 40% of lashes remaining
+- Wet/Mascara full set  |  1 giờ, 30 phút  |  120 CA$
+    Get the bold, fresh-out-of-the-shower lash look with this textured style. Designed to mimic the appearance of mascara, this set features narrow, spiky fans for a darker, more defined finish
+- Wet/Mascara fill  |  1 giờ, 30 phút  |  85 CA$
+    Keep your bold, textured lashes looking fresh with a fill that restores density and definition. Recommended every 2–3 weeks. Must have at least 40% of lashes remaining
+- Hybrid full set  |  1 giờ, 30 phút  |  120 CA$
+    The perfect balance between classic and volume lashes. This versatile style blends individual lashes with light volume fans for added fullness and texture—ideal for those who want a bit more drama than classic but not as bold as volume
+- Hybrid fill  |  1 giờ, 30 phút  |  85 CA$
+    Refresh your hybrid lashes with a balanced mix of classic and volume extensions. Perfect for maintaining fullness and texture between sets. Recommended every 2–3 weeks. Must have at least 40% of lashes remaining
+- Full Volume full set  |  2 giờ  |  130 CA$
+    Achieve maximum fullness and drama with this ultra-glam look. Multiple lightweight extensions are fanned and applied to each natural lash for a dense, fluffy finish. Perfect for those who love bold, eye-catching lashes
+- Volume fill  |  1 giờ, 30 phút  |  95 CA$
+    Maintain the fullness and drama of your volume set with a customized refill of fluffy, lightweight fans. Recommended every 2–3 weeks to keep your lashes looking lush. Must have at least 40% of lashes remaining
+- Mega Volume full set  |  2 giờ, 15 phút  |  140 CA$
+    For the ultimate bold and dramatic look, this set uses ultra-lightweight, ultra-dense fans applied to each natural lash, creating a striking, full-bodied effect. Perfect for special occasions or those who love to stand out
+- Lash Removal (with New Set) – FREE  |  20 phút  |  miễn phí
+    Complimentary removal of your old lash set when you book a new full set. Must be booked together
+- Wispy (ADD ON with other lash services)  |  10 phút  |  10 CA$
+- Eyelash Removal Only  |  15 phút  |  25 CA$
+- Lash Tint  |  30 phút  |  25 CA$
+
+(9 categories, 63 services)

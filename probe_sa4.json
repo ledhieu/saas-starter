@@ -1,0 +1,1 @@
+{"query":"query { geolocation { search(query: \"nail salon\", lat: 49.2827) { edges { node { id name } } } } }"}

@@ -1,0 +1,1 @@
+{"query":"query { location(id: 1) { id name } }"}

@@ -1,0 +1,1 @@
+{"query":"query { locations(category: \"nails\") { edges { node { id } } } }"}

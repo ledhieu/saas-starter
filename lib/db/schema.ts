@@ -5,6 +5,8 @@ import {
   text,
   timestamp,
   integer,
+  index,
+  numeric,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
@@ -140,3 +142,88 @@ export enum ActivityType {
   INVITE_TEAM_MEMBER = 'INVITE_TEAM_MEMBER',
   ACCEPT_INVITATION = 'ACCEPT_INVITATION',
 }
+
+export const competitors = pgTable('competitors', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  slug: varchar('slug', { length: 255 }).notNull().unique(),
+  freshaPid: varchar('fresha_pid', { length: 50 }),
+  businessType: varchar('business_type', { length: 50 }),
+  address: text('address'),
+  city: varchar('city', { length: 100 }),
+  latitude: text('latitude'),
+  longitude: text('longitude'),
+  rating: text('rating'),
+  reviewsCount: integer('reviews_count'),
+  phone: varchar('phone', { length: 50 }),
+  fetchedAt: timestamp('fetched_at').notNull().defaultNow(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export const services = pgTable('services', {
+  id: serial('id').primaryKey(),
+  competitorId: integer('competitor_id').notNull().references(() => competitors.id, { onDelete: 'cascade' }),
+  categoryName: varchar('category_name', { length: 255 }),
+  name: varchar('name', { length: 255 }).notNull(),
+  durationCaption: varchar('duration_caption', { length: 100 }),
+  priceFormatted: varchar('price_formatted', { length: 50 }),
+  priceValueMin: integer('price_value_min'),
+  priceValueMax: integer('price_value_max'),
+  catalogId: varchar('catalog_id', { length: 50 }),
+  fetchedAt: timestamp('fetched_at').notNull().defaultNow(),
+}, (table) => ({
+  competitorFetchedIdx: index('idx_services_competitor_fetched').on(table.competitorId, table.fetchedAt),
+}));
+
+export const searchLookups = pgTable('search_lookups', {
+  id: serial('id').primaryKey(),
+  addressQuery: text('address_query').notNull(),
+  radiusKm: integer('radius_km').notNull(),
+  businessType: varchar('business_type', { length: 50 }),
+  latitude: text('latitude'),
+  longitude: text('longitude'),
+  resultsCount: integer('results_count'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export const tempDisputes = pgTable('temp_dispute', {
+  id: serial('id').primaryKey(),
+  slug: varchar('slug', { length: 255 }).notNull(),
+  field: varchar('field', { length: 50 }).notNull(),
+  discoveredValue: text('discovered_value'),
+  dbValue: text('db_value'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export type TempDispute = typeof tempDisputes.$inferSelect;
+export type NewTempDispute = typeof tempDisputes.$inferInsert;
+
+export const competitorsRelations = relations(competitors, ({ many }) => ({
+  services: many(services),
+}));
+
+export const servicesRelations = relations(services, ({ one }) => ({
+  competitor: one(competitors, {
+    fields: [services.competitorId],
+    references: [competitors.id],
+  }),
+}));
+
+export type Competitor = typeof competitors.$inferSelect;
+export type NewCompetitor = typeof competitors.$inferInsert;
+export const userMenuItems = pgTable('user_menu_items', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  name: text('name').notNull(),
+  price: numeric('price', { precision: 10, scale: 2 }).notNull(),
+  duration: integer('duration'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export type UserMenuItem = typeof userMenuItems.$inferSelect;
+export type NewUserMenuItem = typeof userMenuItems.$inferInsert;
+
+export type Service = typeof services.$inferSelect;
+export type NewService = typeof services.$inferInsert;
+export type SearchLookup = typeof searchLookups.$inferSelect;
+export type NewSearchLookup = typeof searchLookups.$inferInsert;

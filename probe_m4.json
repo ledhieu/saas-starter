@@ -1,0 +1,1 @@
+{"query":"query { category(id: 1) { id } }"}

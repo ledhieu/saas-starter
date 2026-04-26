@@ -1,0 +1,1 @@
+{"query":"query { geolocation { locations(page: 1) { edges { node { id } } } } }"}

@@ -1,0 +1,1 @@
+{"query":"query { booking(id: 1) { id } }"}

@@ -1,0 +1,1 @@
+{"query":"query { geolocation(place: \"Vancouver\") { id } }"}

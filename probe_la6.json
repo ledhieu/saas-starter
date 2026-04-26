@@ -1,0 +1,1 @@
+{"query":"query { geolocation { locations(search: \"nail salon\") { edges { node { id } } } } }"}

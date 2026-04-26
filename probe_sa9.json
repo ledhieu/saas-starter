@@ -1,0 +1,1 @@
+{"query":"query { geolocation { search(query: \"nail salon\", gender: MALE) { edges { node { id name } } } } }"}
