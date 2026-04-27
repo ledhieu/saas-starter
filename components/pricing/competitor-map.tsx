@@ -45,41 +45,29 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): nu
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-function lerpRGB(a: [number, number, number], b: [number, number, number], t: number): string {
-  return `rgb(${Math.round(a[0] + (b[0] - a[0]) * t)},${Math.round(a[1] + (b[1] - a[1]) * t)},${Math.round(a[2] + (b[2] - a[2]) * t)})`;
+function getRatingColor(rating: string | null): string {
+  const r = parseFloat(rating ?? '0');
+  if (Number.isNaN(r) || r === 0) return '#9ca3af';
+  if (r >= 5.0) return '#ef4444';
+  if (r >= 4.9) return '#f97316';
+  if (r >= 4.8) return '#eab308';
+  if (r >= 4.7) return '#84cc16';
+  return '#22c55e';
 }
 
-function getReputationColor(reviewsCount: number | null): string {
-  const n = reviewsCount ?? 0;
-  const t = Math.min(n / 100, 1);
-  const GREEN: [number, number, number] = [34, 197, 94];
-  const YELLOW: [number, number, number] = [234, 179, 8];
-  const RED: [number, number, number] = [239, 68, 68];
-  return t < 0.5 ? lerpRGB(GREEN, YELLOW, t * 2) : lerpRGB(YELLOW, RED, (t - 0.5) * 2);
+function getReviewRadius(reviewsCount: number | null): number {
+  const r = reviewsCount ?? 0;
+  return Math.max(5, Math.min(14, 5 + (r / 100) * 9));
 }
 
-function getPricingColor(price: number | null, median: number | null): string {
-  if (price == null || median == null || median === 0) return '#9ca3af';
-  const ratio = price / median;
-  if (ratio < 0.7) return '#22c55e';
-  if (ratio < 0.9) return '#84cc16';
-  if (ratio < 1.1) return '#eab308';
-  if (ratio < 1.4) return '#f97316';
-  return '#ef4444';
-}
-
-function getPopularityColor(score: number, maxScore: number): string {
-  if (maxScore === 0) return '#9ca3af';
-  const t = score / maxScore;
-  if (t < 0.25) return '#60a5fa';
-  if (t < 0.5) return '#3b82f6';
-  if (t < 0.75) return '#8b5cf6';
-  return '#f97316';
-}
-
-function getServicePrice(competitorId: number, serviceName: string | null, servicesByCompetitor?: Record<number, Array<{ name: string; priceValueMin: number | null }>>): number | null {
+function getServicePrice(
+  competitorId: number,
+  serviceName: string | null,
+  servicesByCompetitor?: Record<number, Array<{ name: string; priceValueMin: number | null }>>
+): number | null {
   if (!serviceName) return null;
-  const svcs = servicesByCompetitor?.[competitorId];
+  if (!servicesByCompetitor || !(competitorId in servicesByCompetitor)) return null;
+  const svcs = servicesByCompetitor[competitorId];
   if (!svcs) return null;
   const match = svcs.find((s) => s.name === serviceName);
   return match?.priceValueMin ?? null;
@@ -89,29 +77,14 @@ function getAvgPrice(
   competitorId: number,
   servicesByCompetitor?: Record<number, Array<{ priceValueMin: number | null }>>
 ): number | null {
-  const svcs = servicesByCompetitor?.[competitorId];
+  if (!servicesByCompetitor || !(competitorId in servicesByCompetitor)) return null;
+  const svcs = servicesByCompetitor[competitorId];
   if (!svcs) return null;
   let sum = 0, count = 0;
   for (const s of svcs) {
     if (s.priceValueMin != null) { sum += s.priceValueMin; count++; }
   }
   return count > 0 ? sum / count : null;
-}
-
-function getGlobalMedianPrice(
-  servicesByCompetitor?: Record<number, Array<{ priceValueMin: number | null }>>
-): number | null {
-  const all: number[] = [];
-  if (!servicesByCompetitor) return null;
-  for (const svcs of Object.values(servicesByCompetitor)) {
-    for (const s of svcs) {
-      if (s.priceValueMin != null) all.push(s.priceValueMin);
-    }
-  }
-  if (all.length === 0) return null;
-  all.sort((a, b) => a - b);
-  const mid = Math.floor(all.length / 2);
-  return all.length % 2 !== 0 ? all[mid] : (all[mid - 1] + all[mid]) / 2;
 }
 
 function popularityScore(reviewsCount: number | null, rating: string | null): number {
@@ -250,10 +223,8 @@ function CompetitorMap({
 
   /* 4️⃣ Memoised GeoJSON — dots + skyscraper bars */
   const { dotsGeoJSON, skyscraperGeoJSON } = useMemo(() => {
-    const globalMedian = getGlobalMedianPrice(servicesByCompetitor);
     const dotFeatures: GeoJSON.Feature<GeoJSON.Point>[] = [];
     const barFeatures: GeoJSON.Feature<GeoJSON.Polygon>[] = [];
-    let maxPop = 0;
 
     for (const c of competitors) {
       if (!c.latitude || !c.longitude) continue;
@@ -261,27 +232,20 @@ function CompetitorMap({
       const lng = parseFloat(c.longitude);
       const insideRadius = radiusKm == null || haversineKm(centerLat, centerLng, lat, lng) <= radiusKm;
       const popScore = popularityScore(c.reviewsCount, c.rating);
-      maxPop = Math.max(maxPop, popScore);
 
-      let color: string;
+      const color = getRatingColor(c.rating);
+      const radiusPx = getReviewRadius(c.reviewsCount);
+
       let heightMeters: number;
-      let radiusPx: number;
-
       if (mode === 'pricing') {
         const price = pricingServiceName
           ? getServicePrice(c.id, pricingServiceName, servicesByCompetitor)
           : getAvgPrice(c.id, servicesByCompetitor);
-        color = getPricingColor(price, globalMedian);
-        heightMeters = price != null ? Math.min(price * 8, 2000) : 50;
-        radiusPx = price != null ? Math.max(5, Math.min(14, 5 + (price / (globalMedian || 1)) * 4)) : 5;
+        heightMeters = price != null ? Math.min(price * 3, 600) : 30;
       } else if (mode === 'popularity') {
-        color = getPopularityColor(popScore, maxPop || 1);
-        heightMeters = Math.min(popScore * 0.8, 2000);
-        radiusPx = maxPop > 0 ? Math.max(5, Math.min(14, 5 + (popScore / maxPop) * 8)) : 5;
+        heightMeters = Math.min(popScore * 0.3, 600);
       } else {
-        color = getReputationColor(c.reviewsCount);
-        heightMeters = Math.min((c.reviewsCount ?? 0) * 3, 2000);
-        radiusPx = 8;
+        heightMeters = Math.min((c.reviewsCount ?? 0) * 1.2, 600);
       }
 
       // Skyscraper bar (small square footprint, extruded upward)

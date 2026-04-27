@@ -27,6 +27,7 @@ import {
 import MenuImport from '@/components/pricing/menu-import';
 import PercentileChart from '@/components/pricing/percentile-chart';
 import AddressAutocomplete from '@/components/pricing/address-autocomplete';
+import CompetitorChatbot from '@/components/pricing/competitor-chatbot';
 import type { MapVisualizationMode } from '@/components/pricing/competitor-map';
 
 const CompetitorMap = dynamic(
@@ -39,6 +40,8 @@ type Competitor = {
   name: string;
   slug: string;
   freshaPid: string | null;
+  googlePlaceId: string | null;
+  source: 'fresha' | 'google' | 'both' | null;
   businessType: string | null;
   address: string | null;
   city: string | null;
@@ -298,6 +301,37 @@ export default function PricingPage() {
   const [hasNextPage, setHasNextPage] = useState(false);
   const [endCursor, setEndCursor] = useState<string | null>(null);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const [sourceFilter, setSourceFilter] = useState<'all' | 'fresha' | 'google' | 'both'>('all');
+
+  const filteredCompetitors =
+    sourceFilter === 'all'
+      ? competitors ?? []
+      : (competitors ?? []).filter((c) => c.source === sourceFilter);
+
+  const sourceBadge = (source: Competitor['source']) => {
+    if (source === 'fresha') {
+      return (
+        <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
+          Fresha
+        </span>
+      );
+    }
+    if (source === 'google') {
+      return (
+        <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+          Google
+        </span>
+      );
+    }
+    if (source === 'both') {
+      return (
+        <span className="inline-flex items-center rounded-full bg-purple-50 px-2 py-0.5 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
+          Fresha + Google
+        </span>
+      );
+    }
+    return null;
+  };
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -654,6 +688,17 @@ export default function PricingPage() {
         </CardContent>
       </Card>
 
+      {/* AI Chatbot */}
+      {competitors && competitors.length > 0 && (
+        <CompetitorChatbot
+          competitors={competitors}
+          servicesByCompetitor={servicesByCompetitor}
+          userMenuItems={userMenuItems}
+          businessType={businessType}
+          address={address}
+        />
+      )}
+
       {/* Results */}
       {competitors && competitors.length === 0 && !loading && (
         <div className="flex flex-col items-center justify-center text-center py-12">
@@ -798,8 +843,8 @@ export default function PricingPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <p className="text-sm text-muted-foreground">
-                Found {competitors.length} competitor
-                {competitors.length !== 1 ? 's' : ''} — sorted by distance
+                Found {filteredCompetitors.length} competitor
+                {filteredCompetitors.length !== 1 ? 's' : ''} — sorted by distance
               </p>
               {fetchingMenus && (
                 <p className="text-sm text-orange-500 flex items-center gap-1">
@@ -809,6 +854,21 @@ export default function PricingPage() {
               )}
             </div>
 
+            {/* Source filter */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Source:</span>
+              <select
+                value={sourceFilter}
+                onChange={(e) => setSourceFilter(e.target.value as 'all' | 'fresha' | 'google' | 'both')}
+                className="h-8 text-sm rounded-md border border-input bg-white px-2 py-0.5 outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              >
+                <option value="all">All</option>
+                <option value="fresha">Fresha</option>
+                <option value="google">Google</option>
+                <option value="both">Fresha + Google</option>
+              </select>
+            </div>
+
             {/* Desktop table */}
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-sm bg-white rounded-xl border shadow-sm">
@@ -816,6 +876,7 @@ export default function PricingPage() {
                   <tr className="border-b border-gray-200 text-left text-muted-foreground bg-gray-50">
                     <th className="py-3 px-4 font-medium">DB ID</th>
                     <th className="py-3 px-4 font-medium">Name</th>
+                    <th className="py-3 px-4 font-medium">Source</th>
                     <th className="py-3 px-4 font-medium">Rating</th>
                     <th className="py-3 px-4 font-medium">Reviews</th>
                     <th className="py-3 px-4 font-medium">Address</th>
@@ -823,7 +884,7 @@ export default function PricingPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {competitors.map((c) => (
+                  {filteredCompetitors.map((c) => (
                     <Fragment key={c.id}>
                       <tr
                         id={`competitor-row-${c.id}`}
@@ -831,6 +892,7 @@ export default function PricingPage() {
                       >
                         <td className="py-3 px-4 font-mono text-xs text-muted-foreground">{c.id}</td>
                         <td className="py-3 px-4 font-medium">{c.name}</td>
+                        <td className="py-3 px-4">{sourceBadge(c.source)}</td>
                         <td className="py-3 px-4">
                           <div className="flex items-center">
                             <Star className="h-4 w-4 text-orange-500 fill-orange-500 mr-1" />
@@ -867,7 +929,7 @@ export default function PricingPage() {
                       </tr>
                       {expandedId === c.id && (
                         <tr className="bg-gray-50">
-                          <td colSpan={6} className="px-4 py-4">
+                          <td colSpan={7} className="px-4 py-4">
                             <CompetitorServices competitorId={c.id} />
                           </td>
                         </tr>
@@ -880,13 +942,16 @@ export default function PricingPage() {
 
             {/* Mobile cards */}
             <div className="md:hidden grid grid-cols-1 gap-4">
-              {competitors.map((c) => (
+              {filteredCompetitors.map((c) => (
                 <Card key={c.id} id={`competitor-row-${c.id}`}>
                   <CardContent className="p-4 space-y-3">
                     <div className="flex items-start justify-between">
                       <div>
                         <p className="font-medium text-gray-900">{c.name}</p>
                         <p className="text-xs font-mono text-muted-foreground">DB ID: {c.id}</p>
+                        <div className="flex items-center mt-1 gap-2">
+                          {sourceBadge(c.source)}
+                        </div>
                         <div className="flex items-center mt-1 text-sm text-muted-foreground">
                           <Star className="h-3.5 w-3.5 text-orange-500 fill-orange-500 mr-1" />
                           <span>{c.rating ?? '—'}</span>

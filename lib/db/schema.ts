@@ -157,6 +157,8 @@ export const competitors = pgTable('competitors', {
   name: varchar('name', { length: 255 }).notNull(),
   slug: varchar('slug', { length: 255 }).notNull().unique(),
   freshaPid: varchar('fresha_pid', { length: 50 }),
+  googlePlaceId: varchar('google_place_id', { length: 100 }),
+  source: varchar('source', { length: 20 }),
   businessType: varchar('business_type', { length: 50 }),
   address: text('address'),
   city: varchar('city', { length: 100 }),

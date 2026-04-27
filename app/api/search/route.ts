@@ -8,6 +8,7 @@ import {
   fetchAllFreshaLocations,
   buildFreshaSearchRequest,
   searchFreshaGraphQL,
+  searchGooglePlaces,
 } from '@/lib/fresha';
 
 const GOOGLE_GEOCODING_URL =
@@ -111,7 +112,7 @@ export async function POST(request: NextRequest) {
       placeId = geocoded.placeId;
     }
 
-    let discovered: Array<{
+    type DiscoveredItem = {
       slug: string;
       freshaPid: string | null;
       name: string;
@@ -121,7 +122,11 @@ export async function POST(request: NextRequest) {
       longitude: string | null;
       rating: string | null;
       reviewsCount: number | null;
-    }> = [];
+      source: 'fresha' | 'google' | 'both';
+      googlePlaceId: string | null;
+    };
+
+    let discovered: DiscoveredItem[] = [];
 
     let pageInfo = { hasNextPage: false, endCursor: null as string | null };
     const freshaQuery = businessType || 'nail salon';
@@ -171,6 +176,8 @@ export async function POST(request: NextRequest) {
             longitude: r.node.address?.longitude ?? null,
             rating: r.node.rating,
             reviewsCount: r.node.reviewsCount,
+            source: 'fresha' as const,
+            googlePlaceId: null,
           }));
 
         discovered = allFresha.sort((a, b) => {
@@ -202,8 +209,31 @@ export async function POST(request: NextRequest) {
         );
       }
     } else {
-      // Non-paginated path (existing behavior)
-      try {
+      // Non-paginated path: parallel Fresha + Google Places
+      const freshaPromise = fetchAllFreshaLocations({
+        lat,
+        lng,
+        query: freshaQuery,
+        max: MAX_FRESHA_RESULTS,
+        distance,
+      });
+
+      const googlePromise = searchGooglePlaces(
+        lat,
+        lng,
+        Math.min(radiusKm, 100) * 1000,
+        businessType || 'nail salon',
+        googleApiKey,
+      );
+
+      const [freshaSettled, googleSettled] = await Promise.allSettled([
+        freshaPromise,
+        googlePromise,
+      ]);
+
+      let freshaItems: Awaited<typeof freshaPromise> = [];
+      if (freshaSettled.status === 'fulfilled') {
+        freshaItems = freshaSettled.value;
         freshaDebug = {
           request: buildFreshaSearchRequest({
             lat,
@@ -213,79 +243,96 @@ export async function POST(request: NextRequest) {
             distance,
           }),
         };
-
-        const freshaResults = await fetchAllFreshaLocations({
-          lat,
-          lng,
-          query: freshaQuery,
-          max: MAX_FRESHA_RESULTS,
-          distance,
-        });
-        const allFresha = freshaResults
-          .filter((r) => r.slug)
-          .map((r) => ({
-            slug: r.slug,
-            freshaPid: r.id ?? null,
-            name: r.name,
-            address: r.address?.shortFormatted ?? null,
-            city: r.address?.cityName ?? null,
-            latitude: r.address?.latitude ?? null,
-            longitude: r.address?.longitude ?? null,
-            rating: r.rating,
-            reviewsCount: r.reviewsCount,
-          }));
-
-        // Fresha returns results sorted by popularity. Re-sort by actual distance.
-        // NO radius filtering — we want to see everything Fresha returns.
-        discovered = allFresha.sort((a, b) => {
-          const da = haversineKm(
-            lat, lng,
-            parseFloat(a.latitude ?? '0'),
-            parseFloat(a.longitude ?? '0')
-          );
-          const db = haversineKm(
-            lat, lng,
-            parseFloat(b.latitude ?? '0'),
-            parseFloat(b.longitude ?? '0')
-          );
-          return da - db;
-        });
-        console.log(
-          `Fresha GraphQL returned ${allFresha.length} results with distance=${distance}km (sorted by distance, no radius filter)`
-        );
-      } catch (e) {
-        const message = e instanceof Error ? e.message : String(e);
-        console.info(
-          `Fresha GraphQL search unavailable (${message}), will use Google Places fallback`
-        );
+      } else {
+        const message = freshaSettled.reason instanceof Error ? freshaSettled.reason.message : String(freshaSettled.reason);
+        console.info(`Fresha GraphQL search unavailable (${message})`);
       }
 
-      // Fallback path: Google Places → Fresha slug matcher
-      if (discovered.length === 0) {
-        const fallbackResults = await discoverCompetitors({
-          lat,
-          lng,
-          radiusKm,
-          businessType: businessType || 'nail salon',
-          googlePlacesApiKey: googleApiKey,
+      let googlePlaces: Awaited<typeof googlePromise> = [];
+      if (googleSettled.status === 'fulfilled') {
+        googlePlaces = googleSettled.value;
+        console.log(`Google Places returned ${googlePlaces.length} results`);
+      } else {
+        const message = googleSettled.reason instanceof Error ? googleSettled.reason.message : String(googleSettled.reason);
+        console.info(`Google Places search unavailable (${message})`);
+      }
+
+      // Build Fresha map
+      const merged = new Map<string, DiscoveredItem>();
+      for (const r of freshaItems.filter((r) => r.slug)) {
+        merged.set(r.slug, {
+          slug: r.slug,
+          freshaPid: r.id ?? null,
+          name: r.name,
+          address: r.address?.shortFormatted ?? null,
+          city: r.address?.cityName ?? null,
+          latitude: r.address?.latitude ?? null,
+          longitude: r.address?.longitude ?? null,
+          rating: r.rating,
+          reviewsCount: r.reviewsCount,
+          source: 'fresha',
+          googlePlaceId: null,
         });
-        discovered = fallbackResults
-          .filter((d) => d.freshaSlug)
-          .map((d) => ({
-            slug: d.freshaSlug!,
+      }
+
+      // Match Google results to Fresha by proximity (50m)
+      const matchedGoogleIds = new Set<string>();
+      for (const place of googlePlaces) {
+        const plat = place.geometry?.location?.lat;
+        const plng = place.geometry?.location?.lng;
+        if (plat == null || plng == null) continue;
+
+        let matched = false;
+        for (const item of merged.values()) {
+          const flat = parseFloat(item.latitude ?? '0');
+          const flng = parseFloat(item.longitude ?? '0');
+          if (flat === 0 && flng === 0) continue;
+
+          const distKm = haversineKm(plat, plng, flat, flng);
+          if (distKm <= 0.05) {
+            item.source = 'both';
+            item.googlePlaceId = place.place_id;
+            matchedGoogleIds.add(place.place_id);
+            matched = true;
+            break;
+          }
+        }
+
+        if (!matched) {
+          const syntheticSlug = `google-${place.place_id}`;
+          merged.set(syntheticSlug, {
+            slug: syntheticSlug,
             freshaPid: null,
-            name: d.freshaName || d.name,
-            address: d.address || null,
+            name: place.name,
+            address: place.vicinity || null,
             city: null,
-            latitude: d.location ? String(d.location.lat) : null,
-            longitude: d.location ? String(d.location.lng) : null,
-            rating: d.rating != null ? String(d.rating) : null,
-            reviewsCount: d.userRatingsTotal ?? null,
-          }));
-        console.log(
-          `Google Places fallback returned ${discovered.length} result(s)`
-        );
+            latitude: String(plat),
+            longitude: String(plng),
+            rating: place.rating != null ? String(place.rating) : null,
+            reviewsCount: place.user_ratings_total ?? null,
+            source: 'google',
+            googlePlaceId: place.place_id,
+          });
+        }
       }
+
+      discovered = Array.from(merged.values()).sort((a, b) => {
+        const da = haversineKm(
+          lat, lng,
+          parseFloat(a.latitude ?? '0'),
+          parseFloat(a.longitude ?? '0')
+        );
+        const db = haversineKm(
+          lat, lng,
+          parseFloat(b.latitude ?? '0'),
+          parseFloat(b.longitude ?? '0')
+        );
+        return da - db;
+      });
+
+      console.log(
+        `Merged results: ${discovered.length} total (Fresha: ${freshaItems.length}, Google: ${googlePlaces.length})`
+      );
 
       pageInfo = { hasNextPage: false, endCursor: null };
     }
@@ -311,6 +358,8 @@ export async function POST(request: NextRequest) {
             name: m.name,
             slug: m.slug,
             freshaPid: m.freshaPid,
+            googlePlaceId: m.googlePlaceId,
+            source: m.source,
             businessType: businessType || null,
             address: m.address,
             city: m.city,
@@ -363,6 +412,8 @@ export async function POST(request: NextRequest) {
               name: m.name,
               slug: m.slug,
               freshaPid: m.freshaPid,
+              googlePlaceId: m.googlePlaceId,
+              source: m.source,
               businessType: businessType || null,
               address: m.address,
               city: m.city,
@@ -397,6 +448,8 @@ export async function POST(request: NextRequest) {
           }> = [
             { field: 'name', discovered: candidate.name, db: existing.name },
             { field: 'freshaPid', discovered: candidate.freshaPid, db: existing.freshaPid },
+            { field: 'googlePlaceId', discovered: candidate.googlePlaceId, db: existing.googlePlaceId },
+            { field: 'source', discovered: candidate.source, db: existing.source },
             { field: 'address', discovered: candidate.address, db: existing.address },
             { field: 'city', discovered: candidate.city, db: existing.city },
             { field: 'latitude', discovered: candidate.latitude, db: existing.latitude },
