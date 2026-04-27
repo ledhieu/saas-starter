@@ -177,7 +177,7 @@ export default function GraphQLProbePage() {
 
   if (user && user.role !== 'owner') {
     return (
-      <section className="flex-1 p-4 lg:p-8 max-w-7xl mx-auto">
+      <section className="flex-1 p-4 lg:p-6 w-full">
         <div className="flex items-center gap-3 text-red-600 bg-red-50 p-4 rounded-lg">
           <AlertTriangle className="h-6 w-6" />
           <div>
@@ -190,7 +190,7 @@ export default function GraphQLProbePage() {
   }
 
   return (
-    <section className="flex-1 p-4 lg:p-8 max-w-7xl mx-auto">
+    <section className="flex-1 p-4 lg:p-6 w-full">
       <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-2">
         GraphQL Endpoint Probe
       </h1>

@@ -3,7 +3,7 @@ import { Loader2 } from 'lucide-react';
 
 export default function PricingPageSkeleton() {
   return (
-    <section className="flex-1 p-4 lg:p-8 max-w-7xl mx-auto">
+    <section className="flex-1 p-4 lg:p-6 w-full">
       <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
         Competitor Pricing
       </h1>

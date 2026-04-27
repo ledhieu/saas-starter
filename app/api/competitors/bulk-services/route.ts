@@ -5,6 +5,7 @@ import { eq } from 'drizzle-orm';
 import { getSession } from '@/lib/auth/session';
 import { fetchMenuForSlug } from '@/lib/fresha';
 import { extractPriceValues, parseActionId } from '@/lib/fresha/menu';
+import { recordServiceChange } from '@/lib/db/queries';
 
 const STALE_DAYS = 7;
 const STALE_MS = STALE_DAYS * 24 * 60 * 60 * 1000;
@@ -95,29 +96,40 @@ export async function POST(request: NextRequest) {
 
         const menu = await fetchMenuForSlug(competitor.slug);
 
+        // Snapshot old services before deleting (for audit comparison)
+        const oldServices = await db
+          .select()
+          .from(services)
+          .where(eq(services.competitorId, competitorId));
+
         // Delete old services
         await db
           .delete(services)
           .where(eq(services.competitorId, competitorId));
 
         let inserted: (typeof services.$inferSelect)[] = [];
+        const newServiceMap = new Map<string, typeof services.$inferInsert>();
+
         if (menu && menu.length > 0) {
           const serviceRows: (typeof services.$inferInsert)[] = [];
           for (const category of menu) {
             for (const item of category.items) {
               const ids = parseActionId(item.primaryAction?.id || '[]');
               const prices = extractPriceValues(item.price?.formatted);
-              serviceRows.push({
+              const row = {
                 competitorId,
                 categoryName: category.name || null,
                 name: item.name,
                 durationCaption: item.caption || null,
                 priceFormatted: item.price?.formatted || null,
-                priceValueMin: prices.min,
-                priceValueMax: prices.max,
+                priceValueMin: prices.min != null ? Math.round(prices.min) : null,
+                priceValueMax: prices.max != null ? Math.round(prices.max) : null,
                 catalogId: ids.catalogId,
                 fetchedAt: new Date(),
-              });
+              };
+              serviceRows.push(row);
+              const key = ids.catalogId || item.name;
+              newServiceMap.set(key, row);
             }
           }
 
@@ -127,6 +139,80 @@ export async function POST(request: NextRequest) {
               .values(serviceRows)
               .returning();
           }
+        }
+
+        // Audit log: compare old vs new services
+        for (const old of oldServices) {
+          const key = old.catalogId || old.name;
+          const newRow = newServiceMap.get(key);
+
+          if (!newRow) {
+            // Service removed
+            await recordServiceChange({
+              competitorId,
+              catalogId: old.catalogId ?? null,
+              serviceName: old.name,
+              field: 'name',
+              oldValue: old.name,
+              newValue: null,
+            });
+            continue;
+          }
+
+          if (old.name !== newRow.name) {
+            await recordServiceChange({
+              competitorId,
+              catalogId: old.catalogId ?? null,
+              serviceName: old.name,
+              field: 'name',
+              oldValue: old.name,
+              newValue: newRow.name,
+            });
+          }
+          if (old.priceFormatted !== newRow.priceFormatted) {
+            await recordServiceChange({
+              competitorId,
+              catalogId: old.catalogId ?? null,
+              serviceName: old.name,
+              field: 'price',
+              oldValue: old.priceFormatted ?? null,
+              newValue: newRow.priceFormatted ?? null,
+            });
+          }
+          if (old.durationCaption !== newRow.durationCaption) {
+            await recordServiceChange({
+              competitorId,
+              catalogId: old.catalogId ?? null,
+              serviceName: old.name,
+              field: 'duration',
+              oldValue: old.durationCaption ?? null,
+              newValue: newRow.durationCaption ?? null,
+            });
+          }
+          if (old.categoryName !== newRow.categoryName) {
+            await recordServiceChange({
+              competitorId,
+              catalogId: old.catalogId ?? null,
+              serviceName: old.name,
+              field: 'category',
+              oldValue: old.categoryName ?? null,
+              newValue: newRow.categoryName ?? null,
+            });
+          }
+
+          newServiceMap.delete(key);
+        }
+
+        // Remaining entries in newServiceMap are brand-new services
+        for (const [, newRow] of newServiceMap) {
+          await recordServiceChange({
+            competitorId,
+            catalogId: newRow.catalogId ?? null,
+            serviceName: newRow.name,
+            field: 'name',
+            oldValue: null,
+            newValue: newRow.name,
+          });
         }
 
         servicesByCompetitor[competitorId] = inserted;

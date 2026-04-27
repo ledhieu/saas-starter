@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse, after } from 'next/server';
+import { NextRequest, NextResponse, after as unstableAfter } from 'next/server';
 import { db } from '@/lib/db/drizzle';
 import { competitors, searchLookups, tempDisputes } from '@/lib/db/schema';
 import { inArray } from 'drizzle-orm';
@@ -7,6 +7,7 @@ import {
   discoverCompetitors,
   fetchAllFreshaLocations,
   buildFreshaSearchRequest,
+  searchFreshaGraphQL,
 } from '@/lib/fresha';
 
 const GOOGLE_GEOCODING_URL =
@@ -68,9 +69,10 @@ export async function POST(request: NextRequest) {
       placeId?: string;
       lat?: number;
       lng?: number;
+      after?: string;
     };
 
-    const { address, radiusKm, businessType } = body;
+    const { address, radiusKm, businessType, after: afterCursor } = body;
     if (!address || typeof radiusKm !== 'number') {
       return NextResponse.json(
         { error: 'Missing required fields: address, radiusKm' },
@@ -121,107 +123,171 @@ export async function POST(request: NextRequest) {
       reviewsCount: number | null;
     }> = [];
 
-    const freshaPlaceId = placeId ?? `${lat},${lng}`;
+    let pageInfo = { hasNextPage: false, endCursor: null as string | null };
     const freshaQuery = businessType || 'nail salon';
+    const distance = Math.min(radiusKm, 100);
     console.log(
-      '[Fresha Search] placeId:',
-      freshaPlaceId,
-      '| query:',
-      freshaQuery,
-      '| max:',
-      MAX_FRESHA_RESULTS
+      '[Fresha Search] lat:', lat,
+      'lng:', lng,
+      '| query:', freshaQuery,
+      '| distance:', distance,
+      '| max:', MAX_FRESHA_RESULTS
     );
 
-    const freshaLatLng = `${lat},${lng}`;
-    let freshaDebug: { withPlaceId?: Record<string, unknown>; withLatLng?: Record<string, unknown> } | null = null;
-    try {
-      freshaDebug = {
-        withPlaceId: placeId
-          ? buildFreshaSearchRequest({
-              placeId,
-              query: freshaQuery,
-              first: MAX_FRESHA_RESULTS,
-              distance: Math.max(radiusKm, 30),
-            })
-          : undefined,
-        withLatLng: buildFreshaSearchRequest({
-          placeId: freshaLatLng,
+    let freshaDebug: { request?: Record<string, unknown> } | null = null;
+
+    if (afterCursor) {
+      // Paginated path: fetch a single page directly
+      try {
+        freshaDebug = {
+          request: buildFreshaSearchRequest({
+            lat,
+            lng,
+            query: freshaQuery,
+            first: MAX_FRESHA_RESULTS,
+            after: afterCursor,
+            distance,
+          }),
+        };
+
+        const page = await searchFreshaGraphQL({
+          lat,
+          lng,
           query: freshaQuery,
           first: MAX_FRESHA_RESULTS,
-          distance: Math.max(radiusKm, 30),
-        }),
-      };
+          after: afterCursor,
+          distance,
+        });
 
-      const freshaResults = await fetchAllFreshaLocations({
-        placeId: freshaPlaceId,
-        query: freshaQuery,
-        max: MAX_FRESHA_RESULTS,
-        distance: Math.max(radiusKm, 30),
-      });
-      const allFresha = freshaResults
-        .filter((r) => r.slug)
-        .map((r) => ({
-          slug: r.slug,
-          freshaPid: r.id ?? null,
-          name: r.name,
-          address: r.address?.shortFormatted ?? null,
-          city: r.address?.cityName ?? null,
-          latitude: r.address?.latitude ?? null,
-          longitude: r.address?.longitude ?? null,
-          rating: r.rating,
-          reviewsCount: r.reviewsCount,
-        }));
+        const allFresha = page.edges
+          .filter((r) => r.node.slug)
+          .map((r) => ({
+            slug: r.node.slug,
+            freshaPid: r.node.id ?? null,
+            name: r.node.name,
+            address: r.node.address?.shortFormatted ?? null,
+            city: r.node.address?.cityName ?? null,
+            latitude: r.node.address?.latitude ?? null,
+            longitude: r.node.address?.longitude ?? null,
+            rating: r.node.rating,
+            reviewsCount: r.node.reviewsCount,
+          }));
 
-      // Fresha returns results sorted by popularity. Re-sort by actual distance.
-      // NO radius filtering — we want to see everything Fresha returns with distance=30km.
-      discovered = allFresha.sort((a, b) => {
-        const da = haversineKm(
-          lat, lng,
-          parseFloat(a.latitude ?? '0'),
-          parseFloat(a.longitude ?? '0')
+        discovered = allFresha.sort((a, b) => {
+          const da = haversineKm(
+            lat, lng,
+            parseFloat(a.latitude ?? '0'),
+            parseFloat(a.longitude ?? '0')
+          );
+          const db = haversineKm(
+            lat, lng,
+            parseFloat(b.latitude ?? '0'),
+            parseFloat(b.longitude ?? '0')
+          );
+          return da - db;
+        });
+
+        pageInfo = {
+          hasNextPage: page.pageInfo.hasNextPage,
+          endCursor: page.pageInfo.endCursor,
+        };
+
+        console.log(
+          `Fresha GraphQL paginated request returned ${allFresha.length} results`
         );
-        const db = haversineKm(
-          lat, lng,
-          parseFloat(b.latitude ?? '0'),
-          parseFloat(b.longitude ?? '0')
+      } catch (e) {
+        const message = e instanceof Error ? e.message : String(e);
+        console.info(
+          `Fresha GraphQL paginated search unavailable (${message})`
         );
-        return da - db;
-      });
-      console.log(
-        `Fresha GraphQL returned ${allFresha.length} results with distance=30km (sorted by distance, no radius filter)`
-      );
-    } catch (e) {
-      const message = e instanceof Error ? e.message : String(e);
-      console.info(
-        `Fresha GraphQL search unavailable (${message}), will use Google Places fallback`
-      );
-    }
+      }
+    } else {
+      // Non-paginated path (existing behavior)
+      try {
+        freshaDebug = {
+          request: buildFreshaSearchRequest({
+            lat,
+            lng,
+            query: freshaQuery,
+            first: MAX_FRESHA_RESULTS,
+            distance,
+          }),
+        };
 
-    // Fallback path: Google Places → Fresha slug matcher
-    if (discovered.length === 0) {
-      const fallbackResults = await discoverCompetitors({
-        lat,
-        lng,
-        radiusKm,
-        businessType: businessType || 'nail salon',
-        googlePlacesApiKey: googleApiKey,
-      });
-      discovered = fallbackResults
-        .filter((d) => d.freshaSlug)
-        .map((d) => ({
-          slug: d.freshaSlug!,
-          freshaPid: null,
-          name: d.freshaName || d.name,
-          address: d.address || null,
-          city: null,
-          latitude: d.location ? String(d.location.lat) : null,
-          longitude: d.location ? String(d.location.lng) : null,
-          rating: d.rating != null ? String(d.rating) : null,
-          reviewsCount: d.userRatingsTotal ?? null,
-        }));
-      console.log(
-        `Google Places fallback returned ${discovered.length} result(s)`
-      );
+        const freshaResults = await fetchAllFreshaLocations({
+          lat,
+          lng,
+          query: freshaQuery,
+          max: MAX_FRESHA_RESULTS,
+          distance,
+        });
+        const allFresha = freshaResults
+          .filter((r) => r.slug)
+          .map((r) => ({
+            slug: r.slug,
+            freshaPid: r.id ?? null,
+            name: r.name,
+            address: r.address?.shortFormatted ?? null,
+            city: r.address?.cityName ?? null,
+            latitude: r.address?.latitude ?? null,
+            longitude: r.address?.longitude ?? null,
+            rating: r.rating,
+            reviewsCount: r.reviewsCount,
+          }));
+
+        // Fresha returns results sorted by popularity. Re-sort by actual distance.
+        // NO radius filtering — we want to see everything Fresha returns.
+        discovered = allFresha.sort((a, b) => {
+          const da = haversineKm(
+            lat, lng,
+            parseFloat(a.latitude ?? '0'),
+            parseFloat(a.longitude ?? '0')
+          );
+          const db = haversineKm(
+            lat, lng,
+            parseFloat(b.latitude ?? '0'),
+            parseFloat(b.longitude ?? '0')
+          );
+          return da - db;
+        });
+        console.log(
+          `Fresha GraphQL returned ${allFresha.length} results with distance=${distance}km (sorted by distance, no radius filter)`
+        );
+      } catch (e) {
+        const message = e instanceof Error ? e.message : String(e);
+        console.info(
+          `Fresha GraphQL search unavailable (${message}), will use Google Places fallback`
+        );
+      }
+
+      // Fallback path: Google Places → Fresha slug matcher
+      if (discovered.length === 0) {
+        const fallbackResults = await discoverCompetitors({
+          lat,
+          lng,
+          radiusKm,
+          businessType: businessType || 'nail salon',
+          googlePlacesApiKey: googleApiKey,
+        });
+        discovered = fallbackResults
+          .filter((d) => d.freshaSlug)
+          .map((d) => ({
+            slug: d.freshaSlug!,
+            freshaPid: null,
+            name: d.freshaName || d.name,
+            address: d.address || null,
+            city: null,
+            latitude: d.location ? String(d.location.lat) : null,
+            longitude: d.location ? String(d.location.lng) : null,
+            rating: d.rating != null ? String(d.rating) : null,
+            reviewsCount: d.userRatingsTotal ?? null,
+          }));
+        console.log(
+          `Google Places fallback returned ${discovered.length} result(s)`
+        );
+      }
+
+      pageInfo = { hasNextPage: false, endCursor: null };
     }
 
     const now = new Date();
@@ -235,7 +301,60 @@ export async function POST(request: NextRequest) {
 
     const existingMap = new Map(existingCandidates.map((c) => [c.slug, c]));
 
-    after(async () => {
+    if (afterCursor) {
+      // Synchronous insert for paginated path so newly discovered competitors
+      // are returned in the same response.
+      const missing = discovered.filter((d) => !existingMap.has(d.slug));
+      if (missing.length > 0) {
+        await db.insert(competitors).values(
+          missing.map((m) => ({
+            name: m.name,
+            slug: m.slug,
+            freshaPid: m.freshaPid,
+            businessType: businessType || null,
+            address: m.address,
+            city: m.city,
+            latitude: m.latitude,
+            longitude: m.longitude,
+            rating: m.rating,
+            reviewsCount: m.reviewsCount,
+            fetchedAt: now,
+          }))
+        );
+      }
+
+      // Re-select to include newly inserted competitors
+      const allCandidates =
+        slugs.length > 0
+          ? await db.select().from(competitors).where(inArray(competitors.slug, slugs))
+          : [];
+
+      // Log search lookup synchronously for paginated requests
+      try {
+        await db.insert(searchLookups).values({
+          addressQuery: address,
+          radiusKm,
+          businessType: businessType || null,
+          latitude: String(lat),
+          longitude: String(lng),
+          resultsCount: discovered.length,
+        });
+      } catch (e) {
+        captureException(e);
+      }
+
+      return NextResponse.json({
+        competitors: allCandidates,
+        centerLat: lat,
+        centerLng: lng,
+        radiusKm,
+        freshaDebug,
+        pageInfo,
+      });
+    }
+
+    // Non-paginated: existing after() logic
+    unstableAfter(async () => {
       try {
         const missing = discovered.filter((d) => !existingMap.has(d.slug));
         if (missing.length > 0) {
@@ -325,6 +444,7 @@ export async function POST(request: NextRequest) {
       centerLng: lng,
       radiusKm,
       freshaDebug,
+      pageInfo,
     });
   } catch (error) {
     captureException(error);

@@ -7,8 +7,16 @@ import {
   integer,
   index,
   numeric,
+  customType,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
+
+// PostGIS geography type for spatial queries
+export const geographyPoint = customType<{ data: string; driverData: string }>({
+  dataType() {
+    return 'geography(Point, 4326)';
+  },
+});
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -79,6 +87,7 @@ export const teamsRelations = relations(teams, ({ many }) => ({
 export const usersRelations = relations(users, ({ many }) => ({
   teamMembers: many(teamMembers),
   invitationsSent: many(invitations),
+  searchSessions: many(searchSessions),
 }));
 
 export const invitationsRelations = relations(invitations, ({ one }) => ({
@@ -153,6 +162,7 @@ export const competitors = pgTable('competitors', {
   city: varchar('city', { length: 100 }),
   latitude: text('latitude'),
   longitude: text('longitude'),
+  location: geographyPoint('location'),
   rating: text('rating'),
   reviewsCount: integer('reviews_count'),
   phone: varchar('phone', { length: 50 }),
@@ -175,6 +185,61 @@ export const services = pgTable('services', {
   competitorFetchedIdx: index('idx_services_competitor_fetched').on(table.competitorId, table.fetchedAt),
 }));
 
+export const serviceAuditLog = pgTable('service_audit_log', {
+  id: serial('id').primaryKey(),
+  competitorId: integer('competitor_id')
+    .notNull()
+    .references(() => competitors.id, { onDelete: 'cascade' }),
+  catalogId: varchar('catalog_id', { length: 50 }),
+  serviceName: varchar('service_name', { length: 255 }).notNull(),
+  field: varchar('field', { length: 50 }).notNull(),
+  oldValue: text('old_value'),
+  newValue: text('new_value'),
+  changedAt: timestamp('changed_at').notNull().defaultNow(),
+});
+
+export type ServiceAuditLog = typeof serviceAuditLog.$inferSelect;
+export type NewServiceAuditLog = typeof serviceAuditLog.$inferInsert;
+
+// ── Staging tables: population scripts write here first ──
+export const stagingCompetitors = pgTable('staging_competitors', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  slug: varchar('slug', { length: 255 }).notNull().unique(),
+  freshaPid: varchar('fresha_pid', { length: 50 }),
+  businessType: varchar('business_type', { length: 50 }),
+  address: text('address'),
+  city: varchar('city', { length: 100 }),
+  latitude: text('latitude'),
+  longitude: text('longitude'),
+  location: geographyPoint('location'),
+  rating: text('rating'),
+  reviewsCount: integer('reviews_count'),
+  phone: varchar('phone', { length: 50 }),
+  fetchedAt: timestamp('fetched_at').notNull().defaultNow(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export const stagingServices = pgTable('staging_services', {
+  id: serial('id').primaryKey(),
+  competitorId: integer('competitor_id').notNull().references(() => stagingCompetitors.id, { onDelete: 'cascade' }),
+  categoryName: varchar('category_name', { length: 255 }),
+  name: varchar('name', { length: 255 }).notNull(),
+  durationCaption: varchar('duration_caption', { length: 100 }),
+  priceFormatted: varchar('price_formatted', { length: 50 }),
+  priceValueMin: integer('price_value_min'),
+  priceValueMax: integer('price_value_max'),
+  catalogId: varchar('catalog_id', { length: 50 }),
+  fetchedAt: timestamp('fetched_at').notNull().defaultNow(),
+}, (table) => ({
+  competitorFetchedIdx: index('idx_staging_services_competitor_fetched').on(table.competitorId, table.fetchedAt),
+}));
+
+export type StagingCompetitor = typeof stagingCompetitors.$inferSelect;
+export type NewStagingCompetitor = typeof stagingCompetitors.$inferInsert;
+export type StagingService = typeof stagingServices.$inferSelect;
+export type NewStagingService = typeof stagingServices.$inferInsert;
+
 export const searchLookups = pgTable('search_lookups', {
   id: serial('id').primaryKey(),
   addressQuery: text('address_query').notNull(),
@@ -183,6 +248,33 @@ export const searchLookups = pgTable('search_lookups', {
   latitude: text('latitude'),
   longitude: text('longitude'),
   resultsCount: integer('results_count'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export const searchSessions = pgTable('search_sessions', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  addressQuery: text('address_query'),
+  radiusKm: integer('radius_km'),
+  businessType: varchar('business_type', { length: 50 }),
+  latitude: text('latitude'),
+  longitude: text('longitude'),
+  resultsCount: integer('results_count'),
+  cursor: text('cursor'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
+export const searchSessionCompetitors = pgTable('search_session_competitors', {
+  id: serial('id').primaryKey(),
+  sessionId: integer('session_id')
+    .notNull()
+    .references(() => searchSessions.id, { onDelete: 'cascade' }),
+  competitorId: integer('competitor_id')
+    .notNull()
+    .references(() => competitors.id, { onDelete: 'cascade' }),
+  distanceKm: numeric('distance_km', { precision: 10, scale: 2 }),
   createdAt: timestamp('created_at').notNull().defaultNow(),
 });
 
@@ -200,6 +292,7 @@ export type NewTempDispute = typeof tempDisputes.$inferInsert;
 
 export const competitorsRelations = relations(competitors, ({ many }) => ({
   services: many(services),
+  searchSessionCompetitors: many(searchSessionCompetitors),
 }));
 
 export const servicesRelations = relations(services, ({ one }) => ({
@@ -211,6 +304,31 @@ export const servicesRelations = relations(services, ({ one }) => ({
 
 export type Competitor = typeof competitors.$inferSelect;
 export type NewCompetitor = typeof competitors.$inferInsert;
+
+export const searchSessionsRelations = relations(searchSessions, ({ one, many }) => ({
+  user: one(users, {
+    fields: [searchSessions.userId],
+    references: [users.id],
+  }),
+  searchSessionCompetitors: many(searchSessionCompetitors),
+}));
+
+export const searchSessionCompetitorsRelations = relations(searchSessionCompetitors, ({ one }) => ({
+  session: one(searchSessions, {
+    fields: [searchSessionCompetitors.sessionId],
+    references: [searchSessions.id],
+  }),
+  competitor: one(competitors, {
+    fields: [searchSessionCompetitors.competitorId],
+    references: [competitors.id],
+  }),
+}));
+
+export type SearchSession = typeof searchSessions.$inferSelect;
+export type NewSearchSession = typeof searchSessions.$inferInsert;
+export type SearchSessionCompetitor = typeof searchSessionCompetitors.$inferSelect;
+export type NewSearchSessionCompetitor = typeof searchSessionCompetitors.$inferInsert;
+
 export const userMenuItems = pgTable('user_menu_items', {
   id: serial('id').primaryKey(),
   userId: integer('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),

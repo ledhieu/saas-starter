@@ -1,235 +1,99 @@
-# Competitive Pricing Dashboard — Full Rewrite Plan
+# Implementation Plan — Parallel Workstreams
 
-## Problem Statement
-The current search flow is synchronous and monolithic: one API call geocodes, discovers, scrapes info+menus for every competitor, and saves to DB before returning. With 20–50 competitors this issues 100+ sequential HTTP requests and can hang forever. The UI spinner never clears because neither client nor server has timeouts.
-
-## Target Architecture
-
-### Phase 1 — Fast Search (return competitors in < 3s)
-`POST /api/search` does only:
-1. Geocode address → lat, lng
-2. Discover competitors via Fresha GraphQL (capped at 50, single page)
-3. Upsert competitor **basic info only** (name, slug, address, lat/lng, rating, reviewsCount)
-4. Return competitors immediately
-
-### Phase 2 — Background Menu Fetching
-Client calls `POST /api/competitors/bulk-services` with `{ competitorIds: number[] }`:
-1. For each competitor ID, check DB `services` table for cached services (stale threshold: 24h)
-2. For cache misses, queue Fresha menu fetch with 500ms throttle between requests
-3. Save fetched menus to DB
-4. Return all services for requested competitors
-
-### Phase 3 — Map Visualization
-- Google Map centered on search location with a pin
-- Each competitor shown as a circle marker:
-  - **Radius** ∝ `sqrt(reviewsCount)` (scaled for visibility)
-  - **Color**: red (< 3.0), yellow (3.0–4.0), green (> 4.0)
-  - Click opens InfoWindow with name, rating, review count
-- Markers update as Phase 2 data arrives
-
-### Phase 4 — User Menu Import + Percentile Charts
-- New table `user_menu_items`: id, userId, name, price, duration, createdAt
-- User can add/import menu items
-- For each user menu item, compute percentile among matched competitor services
-- **Semantic matching**: use `string-similarity` or `wink-nlp` for fuzzy matching of service names (e.g., "Classic Manicure" ≈ "Manicure — Classic")
-- Chart.js distribution chart showing where user's price sits vs competitors
-
-### Phase 5 — Research (parallel)
-Investigate whether Fresha API associates individual reviews with specific services.
+## Context
+- Fresha `Search_Venues_Query` pagination now works with `geocode` + `distance` + `after` cursor.
+- Radius dropdown exists in UI (`radiusOptions = [1,3,5,10,25]`) but is NOT wired to `distance` in the API (API hardcodes `Math.max(radiusKm, 30)`).
+- Map uses `@react-google-maps/api`. Need to switch to Mapbox.
+- No session persistence for searches exists yet.
+- Need to populate nail salons in 4 cities as a background job.
 
 ---
 
-## Work Streams
+## Workstream A: Radius Dropdown + Distance + Fetch-More Pagination
+**Files:** `app/(dashboard)/dashboard/pricing/page.tsx`, `app/api/search/route.ts`, `lib/fresha/discover.ts`
 
-### Stream A — Fix Search API + Client Timeouts (Critical Path)
-**Owner:** Subagent A
-**Files:**
-- `app/api/search/route.ts` — rewrite to return fast, fetch only basic competitor info
-- `lib/fresha/discover.ts` — add `fetch` timeouts (10s) to all external calls
-- `app/(dashboard)/dashboard/pricing/page.tsx` — add AbortController + 30s timeout to fetch
-
-**Acceptance:**
-- Search completes and returns competitors in < 3s
-- Client loading state clears even if server errors
-- Server never hangs > 30s
-
-**Interface:**
-- `POST /api/search` returns `{ competitors: Competitor[], centerLat: number, centerLng: number }`
-- Competitor object: `{ id, name, slug, address, city, latitude, longitude, rating, reviewsCount, fetchedAt }`
+1. Expand `radiusOptions` to `[1, 3, 5, 10, 25, 50, 100]`
+2. Pass selected `radiusKm` as `distance` to `/api/search` (currently hardcoded to `Math.max(radiusKm, 30)`)
+3. Update `/api/search` to use the user's selected radius (capped at 100km)
+4. Return `pageInfo` (`hasNextPage`, `endCursor`) from the search API
+5. Add "Fetch More" button in the pricing page that calls `/api/search` with the cursor and appends results
+6. Keep `geocode` + `distance` identical across pagination requests
 
 ---
 
-### Stream B — Bulk Services API + DB Cache Layer
-**Owner:** Subagent B
-**Files:**
-- `app/api/competitors/bulk-services/route.ts` — new route
-- `lib/db/schema.ts` — may need index on `services.competitorId + fetchedAt`
+## Workstream B: Google Maps → Mapbox Migration
+**Files:** `components/pricing/competitor-map.tsx`, `components/pricing/address-autocomplete.tsx`, `package.json`
 
-**Logic:**
-```
-POST /api/competitors/bulk-services
-Body: { competitorIds: number[], forceRefresh?: boolean }
-
-For each competitorId:
-  1. If !forceRefresh, select services where competitorId = ? AND fetchedAt > staleThreshold
-  2. If results found, use cached
-  3. Else:
-     a. Fetch slug from competitors table
-     b. Call fetchMenuForSlug(slug) — with 500ms sleep between calls
-     c. Save to DB (delete old, insert new)
-     d. Return services
-
-Return: { [competitorId]: Service[] }
-```
-
-**Acceptance:**
-- Fetches menus for 10 competitors in < 10s (with throttle)
-- Respects 500ms delay between Fresha API calls
-- Uses DB cache on subsequent calls (instant)
+1. Install `mapbox-gl` and `react-map-gl` (or use raw `mapbox-gl`)
+2. Replace `competitor-map.tsx`:
+   - Remove `@react-google-maps/api`
+   - Use Mapbox GL JS with style `mapbox://styles/ldhieu/cmog94ecj001u01sqcybj4anq`
+   - Use `MAPBOX_PUBLIC_API_KEY` from `.env`
+   - Keep circles for threat radius, center marker, radius boundary
+   - Keep InfoWindow behavior
+3. Replace `address-autocomplete.tsx`:
+   - Remove Google Places Autocomplete
+   - Use Mapbox Geocoding API for address autocomplete
+   - Return `{ address, placeId, lat, lng }` on select
+4. Remove `@react-google-maps/api` and `@deck.gl/google-maps` from dependencies
 
 ---
 
-### Stream C — Google Map Visualization
-**Owner:** Subagent C
-**Files:**
-- `app/(dashboard)/dashboard/pricing/page.tsx` — add Map component
-- `components/pricing/map.tsx` — new component
-- `app/(dashboard)/dashboard/pricing/competitor-marker.tsx` — new component
+## Workstream C: Session Persistence (Search Sessions per User)
+**Files:** `lib/db/schema.ts`, migrations, new API routes
 
-**Requirements:**
-- `@react-google-maps/api` is already installed
-- Map centered on `centerLat/centerLng` from search response
-- Pinned location marker (different icon/color from competitors)
-- Competitor circles:
-  ```tsx
-  radius = Math.sqrt(reviewsCount || 1) * 15  // tune for visibility
-  color = rating > 4 ? '#22c55e' : rating >= 3 ? '#eab308' : '#ef4444'
-  ```
-- InfoWindow on click showing name, rating stars, review count, address
-- Update markers when bulk-services data arrives
-
-**Acceptance:**
-- Map renders immediately when search returns
-- All competitors visible as colored circles
-- InfoWindow works on click
+1. Add `search_sessions` table:
+   - `id`, `userId`, `address`, `radiusKm`, `businessType`, `lat`, `lng`, `cursor`, `createdAt`
+2. Add `search_session_results` table (join table linking sessions to competitors found):
+   - `id`, `sessionId`, `competitorId`, `distanceKm`, `createdAt`
+3. Create `POST /api/search/sessions` — save a search session
+4. Create `GET /api/search/sessions` — list user's previous sessions
+5. Create `GET /api/search/sessions/[id]` — retrieve a session with its competitors
+6. Update `POST /api/search` to optionally save the session (query param `?save=true`)
 
 ---
 
-### Stream D — User Menu Import + Semantic Matching + Percentile Charts
-**Owner:** Subagent D
-**Files:**
-- `lib/db/schema.ts` — add `user_menu_items` table
-- `app/api/user-menu/route.ts` — CRUD for user menu
-- `app/api/user-menu/match/route.ts` — semantic matching endpoint
-- `app/(dashboard)/dashboard/pricing/menu-import.tsx` — UI component
-- `app/(dashboard)/dashboard/pricing/percentile-chart.tsx` — chart component
+## Workstream D: MCP vs Built-in AI Architecture
+**Output:** `docs/ai-architecture.md`
 
-**Semantic Matching (lightweight):**
-Use `string-similarity` npm package (Jaro-Winkler) or simple token overlap:
-```ts
-function similarity(a: string, b: string): number {
-  const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(w => w.length > 2);
-  const tokensA = new Set(normalize(a));
-  const tokensB = new Set(normalize(b));
-  const intersection = [...tokensA].filter(x => tokensB.has(x)).length;
-  const union = new Set([...tokensA, ...tokensB]).size;
-  return intersection / union; // Jaccard
-}
-```
-Match user menu item to competitor service if similarity > 0.3.
-
-**Percentile Chart:**
-For matched services, collect all prices, then:
-```ts
-const prices = matchedServices.map(s => s.priceValueMin).filter(Boolean).sort((a, b) => a - b);
-const percentile = prices.filter(p => p < userPrice).length / prices.length * 100;
-```
-Chart.js histogram with vertical line for user's price.
-
-**Acceptance:**
-- User can add menu items
-- Each item shows matched competitor services count
-- Distribution chart renders with percentile label
+1. Compare two approaches for AI analytics:
+   - **MCP (Model Context Protocol):** External AI agent connects via MCP server to read DB/API. Pros: any model, no app bloat, standardized. Cons: extra infra, latency, security surface.
+   - **Built-in AI:** OpenAI/Anthropic SDK inside Next.js API routes. Pros: low latency, full control, native UI integration. Cons: vendor lock-in, token costs, app complexity.
+2. Recommend hybrid: built-in AI for common queries ("compare my prices"), MCP for deep analytics by power users.
+3. Cost estimates and security considerations.
 
 ---
 
-### Stream E — Research Fresha Review-Service Association
-**Owner:** Subagent E
-**Research scope:**
-1. Probe Fresha GraphQL for review queries. Look for fields like:
-   - `location.reviews` — do review nodes have `service` or `appointmentService` fields?
-   - `Review` type — any `service` or `serviceId` field?
-2. Check Fresha public salon pages HTML — is service info embedded in review markup?
-3. Check if reviews GraphQL endpoint supports filtering by service
+## Workstream E: Background Population Script
+**New file:** `scripts/populate-cities.ts` (or `lib/fresha/populate.ts`)
 
-**Deliverable:**
-- Report in `instructions/fresha-reviews-research.md`
-- Sample GraphQL queries if any exist
-- Conclusion: yes/no/partial with evidence
+1. For each city (Vancouver, Toronto, Ho Chi Minh City, Hanoi):
+   - Geocode city to get lat/lng
+   - Call `fetchAllFreshaLocations({ lat, lng, query: 'nail salon', distance: 10000 })`
+   - Insert competitors into DB (skip duplicates by slug)
+   - Fetch menus via `fetchMenuForSlug` with 500ms throttle
+2. Run as a one-off Node script via `npx tsx`
+3. Log progress per city
 
 ---
 
-## Execution Order
+## Workstream F: Walk-in Customer Flow Probability Model
+**Output:** `docs/customer-flow-model.md`
 
-1. **First, run Stream A + Stream E in parallel** (A is critical, E is independent research)
-2. **Then run Stream B + Stream C in parallel** (both depend on A's interface)
-3. **Finally run Stream D** (depends on B's bulk-services endpoint)
+1. Research spatial interaction models (Huff Model, Reilly's Law of Retail Gravitation) for predicting walk-in probability
+2. Define variables:
+   - **Attractiveness:** rating, reviewsCount, price competitiveness, photos, deals
+   - **Distance decay:** walking distance vs driving distance (different decay functions)
+   - **Competition density:** number of alternatives within radius
+   - **Time-based factors:** day of week, hour, seasonality
+3. Propose a probability formula: `P(visit) = f(attractiveness) * g(distance) * h(competition)`
+4. Suggest how to calibrate with real data (booking conversion rates from Fresha if available, foot traffic data)
+5. Propose UI visualization: heatmap overlay showing "expected customer capture" per competitor
 
-## Shared Interfaces
+---
 
-```ts
-// Competitor (returned by /api/search)
-interface Competitor {
-  id: number;
-  name: string;
-  slug: string;
-  address: string | null;
-  city: string | null;
-  latitude: string | null;
-  longitude: string | null;
-  rating: string | null;
-  reviewsCount: number | null;
-  fetchedAt: Date | null;
-}
-
-// Service (from bulk-services)
-interface Service {
-  id: number;
-  competitorId: number;
-  categoryName: string | null;
-  name: string;
-  durationCaption: string | null;
-  priceFormatted: string | null;
-  priceValueMin: number | null;
-  priceValueMax: number | null;
-  catalogId: string | null;
-  fetchedAt: Date;
-}
-
-// User Menu Item
-interface UserMenuItem {
-  id: number;
-  userId: number;
-  name: string;
-  price: number;
-  duration: number | null; // minutes
-  createdAt: Date;
-}
-```
-
-## Database Migrations Needed
-
-```sql
--- Add user_menu_items table
-CREATE TABLE user_menu_items (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  name TEXT NOT NULL,
-  price NUMERIC(10,2) NOT NULL,
-  duration INTEGER,
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
--- Index for faster service cache lookups
-CREATE INDEX idx_services_competitor_fetched ON services(competitor_id, fetched_at);
-```
+## Parallelization & Conflict Avoidance
+- **A + B can run in parallel** — A touches the pricing page logic/API, B touches map/autocomplete components. They only intersect at the pricing page imports, which are additive.
+- **C can run in parallel** — C touches DB schema/migrations only. No overlap with A or B.
+- **D + F are research-only** — zero code conflicts.
+- **E uses the updated `lib/fresha/discover.ts`** — depends on A's backend changes, but can be drafted in parallel and tested after A merges.

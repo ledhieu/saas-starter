@@ -1,0 +1,30 @@
+{
+  "props": {
+    "pageProps": {
+      "initialTaxonomy": {
+        "id": "category:nails",
+        "name": "Nails"
+      },
+      "providersProps": {
+        "basicProfile": {
+          "profile": null
+        },
+        "fallback": {}
+      },
+      "_sentryTraceData": "69edfce700000000e15a7fc51ba1f165-7d8299725fe7eb00-1",
+      "_sentryBaggage": "sentry-environment=production,sentry-release=9e7252b67dc412530170166b08dc57bcf08f8298,sentry-public_key=388fe63e6063cc241ca2a1b0f52622a3,sentry-trace_id=69edfce700000000e15a7fc51ba1f165,sentry-org_id=61919,sentry-sampled=true"
+    }
+  },
+  "page": "/search",
+  "query": {
+    "category": "nails",
+    "center": "49.2827,-123.1207",
+    "distance": "30000"
+  },
+  "buildId": "9e7252b67dc412530170166b08dc57bcf08f8298",
+  "assetPrefix": "//www.fresha.com/assets",
+  "isFallback": false,
+  "isExperimentalCompile": false,
+  "gip": true,
+  "scriptLoader": []
+}

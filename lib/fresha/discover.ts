@@ -39,8 +39,6 @@ export interface FreshaSearchNode {
   slug: string;
   rating: string | null;
   reviewsCount: number | null;
-  contactNumber: string | null;
-  description: string | null;
   address: {
     shortFormatted: string | null;
     cityName: string | null;
@@ -207,27 +205,97 @@ export async function findFreshaSlugForPlace(
 }
 
 export function buildFreshaSearchRequest({
-  placeId,
+  lat,
+  lng,
   query,
-  first = 50,
+  first = 200,
   after = '',
   distance,
+  freshaVerifiedOnly = false,
+  hasDeals = false,
+  hasGroupAppointments = false,
+  sort = 'RECOMMENDED',
+  aspectRatio = 1,
 }: {
-  placeId: string;
+  lat: number;
+  lng: number;
   query: string;
   first?: number;
   after?: string;
   distance?: number;
+  freshaVerifiedOnly?: boolean;
+  hasDeals?: boolean;
+  hasGroupAppointments?: boolean;
+  sort?: string;
+  aspectRatio?: number;
 }) {
-  const variables = distance != null
-    ? { placeId, query, first, after, distance }
-    : { placeId, query, first, after };
+  const variables: Record<string, unknown> = {
+    aspectRatio,
+    first,
+    freshaVerifiedOnly,
+    geocode: { latitude: lat, longitude: lng },
+    hasDeals,
+    hasGroupAppointments,
+    query: query || '',
+    sort,
+  };
 
-  const queryWithDistance = 'query SearchLocations($placeId: ID!, $query: String!, $first: Int!, $after: ID, $distance: Float) { geolocation(placeId: $placeId) { locations(query: $query, first: $first, after: $after, distance: $distance) {';
-  const queryWithoutDistance = 'query SearchLocations($placeId: ID!, $query: String!, $first: Int!, $after: ID) { geolocation(placeId: $placeId) { locations(query: $query, first: $first, after: $after) {';
-  const querySuffix = ' edges { node { id name slug rating reviewsCount address { shortFormatted cityName latitude longitude } } } pageInfo { hasNextPage endCursor } } } }';
+  if (distance != null) {
+    variables.distance = distance;
+  }
 
-  const graphqlQuery = (distance != null ? queryWithDistance : queryWithoutDistance) + querySuffix;
+  if (after) {
+    variables.after = after;
+  }
+
+  const graphqlQuery = `query Search_Venues_Query(
+  $aspectRatio: Float!
+  $first: Int!
+  $freshaVerifiedOnly: Boolean!
+  $geocode: Geocode
+  $hasDeals: Boolean!
+  $hasGroupAppointments: Boolean!
+  $query: String
+  $sort: GeolocationLocationsSorting!
+  $after: ID
+  $distance: Float
+) {
+  geolocation(geocode: $geocode) {
+    locations(
+      query: $query
+      first: $first
+      after: $after
+      sort: $sort
+      freshaVerifiedOnly: $freshaVerifiedOnly
+      hasDeals: $hasDeals
+      distance: $distance
+      hasGroupAppointments: $hasGroupAppointments
+      aspectRatio: $aspectRatio
+    ) {
+      edges {
+        node {
+          id
+          hasDeals
+          name
+          slug
+          rating
+          reviewsCount
+          address {
+            shortFormatted
+            cityName
+            latitude
+            longitude
+          }
+        }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}`;
+
   const body = JSON.stringify({ query: graphqlQuery, variables });
 
   const headers = {
@@ -236,6 +304,7 @@ export function buildFreshaSearchRequest({
     'Accept-Language': 'en-CA',
     'x-client-platform': 'web',
     'x-client-version': CLIENT_VERSION,
+    'x-graphql-operation-name': 'query Search_Venues_Query',
     'Origin': 'https://www.fresha.com',
     'Referer': 'https://www.fresha.com/',
   };
@@ -244,19 +313,21 @@ export function buildFreshaSearchRequest({
 }
 
 export async function searchFreshaGraphQL({
-  placeId,
+  lat,
+  lng,
   query,
-  first = 50,
+  first = 200,
   after = '',
   distance,
 }: {
-  placeId: string;
+  lat: number;
+  lng: number;
   query: string;
   first?: number;
   after?: string;
   distance?: number;
 }): Promise<FreshaSearchPage> {
-  const { endpoint, headers, body } = buildFreshaSearchRequest({ placeId, query, first, after, distance });
+  const { endpoint, headers, body } = buildFreshaSearchRequest({ lat, lng, query, first, after, distance });
 
   console.log('[Fresha GraphQL] Request body:', body);
 
@@ -279,20 +350,7 @@ export async function searchFreshaGraphQL({
     throw new Error(`Fresha search returned invalid JSON: ${responseText.substring(0, 500)}`);
   }
 
-  // Gracefully handle GraphQL errors
   if (json.errors) {
-    const isInternalError = Array.isArray(json.errors) && json.errors.some(
-      (e: { extensions?: { code?: string } }) =>
-        e.extensions?.code === 'INTERNAL_SERVER_ERROR'
-    );
-
-    // If it's an internal server error and we requested more than 10 results,
-    // retry once with a smaller batch — some Fresha resolvers choke on larger pages.
-    if (isInternalError && first > 10) {
-      console.log('[Fresha GraphQL] Retrying with first=10 due to INTERNAL_SERVER_ERROR');
-      return searchFreshaGraphQL({ placeId, query, first: 10, after });
-    }
-
     throw new Error('Fresha search GraphQL errors: ' + JSON.stringify(json.errors));
   }
 
@@ -300,36 +358,43 @@ export async function searchFreshaGraphQL({
 }
 
 export async function fetchAllFreshaLocations({
-  placeId,
+  lat,
+  lng,
   query,
   max = Infinity,
   distance,
+  batchSize = 200,
+  after: startAfter = '',
 }: {
-  placeId: string;
+  lat: number;
+  lng: number;
   query: string;
   max?: number;
   distance?: number;
+  batchSize?: number;
+  after?: string;
 }): Promise<FreshaSearchNode[]> {
   const all: FreshaSearchNode[] = [];
-  let after = '';
+  let after = startAfter;
   let pageNum = 0;
 
   while (all.length < max) {
     pageNum++;
-    const batchSize = Math.min(200, max - all.length); // Fresha caps at 200 per page
+    const pageFirst = Math.min(batchSize, max - all.length);
 
-    let page: FreshaSearchPage;
+    let page: { edges: { node: FreshaSearchNode }[]; pageInfo: { hasNextPage: boolean; endCursor: string | null } };
     try {
-      page = await searchFreshaGraphQL({ placeId, query, first: batchSize, after, distance });
-    } catch (e) {
-      const message = e instanceof Error ? e.message : String(e);
-      // Fresha's endCursor frequently causes INTERNAL_SERVER_ERROR on page 2+.
-      // Return whatever we have instead of failing entirely.
-      if (pageNum > 1 && message.includes('INTERNAL_SERVER_ERROR')) {
-        console.log(`[Fresha Pagination] Page ${pageNum} failed with cursor, returning ${all.length} accumulated results`);
-        return all;
-      }
-      throw e;
+      page = await searchFreshaGraphQL({
+        lat,
+        lng,
+        query,
+        first: pageFirst,
+        after,
+        distance,
+      });
+    } catch (err) {
+      console.warn(`[Fresha] Pagination failed at page ${pageNum}, returning ${all.length} results.`);
+      break;
     }
 
     for (const edge of page.edges) {
@@ -339,6 +404,11 @@ export async function fetchAllFreshaLocations({
 
     if (!page.pageInfo.hasNextPage || !page.pageInfo.endCursor) break;
     after = page.pageInfo.endCursor;
+
+    // Be respectful to Fresha's API — small delay between pages
+    if (all.length < max) {
+      await sleep(SLEEP_MS);
+    }
   }
 
   return all;

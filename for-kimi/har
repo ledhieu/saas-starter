@@ -1,0 +1,3253 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "WebInspector",
+      "version": "537.36"
+    },
+    "pages": [],
+    "entries": [
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 57,
+                "columnNumber": 5427
+              },
+              {
+                "functionName": "c",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 37,
+                "columnNumber": 37485
+              },
+              {
+                "functionName": "e",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 44,
+                "columnNumber": 53304
+              },
+              {
+                "functionName": "p",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 44,
+                "columnNumber": 53471
+              },
+              {
+                "functionName": "W",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 44,
+                "columnNumber": 54864
+              },
+              {
+                "functionName": "fetchData",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 44,
+                "columnNumber": 70867
+              },
+              {
+                "functionName": "q",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 44,
+                "columnNumber": 50573
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "prefetch",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 44,
+                  "columnNumber": 70850
+                }
+              ],
+              "parent": {
+                "description": "await",
+                "callFrames": [
+                  {
+                    "functionName": "t.<computed>",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 41,
+                    "columnNumber": 749
+                  },
+                  {
+                    "functionName": "N",
+                    "scriptId": "19",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                    "lineNumber": 15,
+                    "columnNumber": 2464388
+                  },
+                  {
+                    "functionName": "onMouseEnter",
+                    "scriptId": "19",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                    "lineNumber": 15,
+                    "columnNumber": 2466297
+                  },
+                  {
+                    "functionName": "u5",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 141162
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 147248
+                  },
+                  {
+                    "functionName": "tC",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 23359
+                  },
+                  {
+                    "functionName": "sr",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 142395
+                  },
+                  {
+                    "functionName": "cp",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 169620
+                  },
+                  {
+                    "functionName": "cd",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 169535
+                  },
+                  {
+                    "functionName": "r",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 45,
+                    "columnNumber": 4365
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "GET",
+          "url": "https://www.fresha.com/_next/data/2567b515c77631564f8194baa7a6e0e5b1bc07eb/vi/a/rachels-hair-salon-vancouver-3143-cambie-street-et13rtr2.json?locationSlug=rachels-hair-salon-vancouver-3143-cambie-street-et13rtr2&routeCtx=vi",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.fresha.com/vi/search?address-name=Metrotown,+Burnaby,+BC,+Canada&place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc&search-place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc"
+            },
+            {
+              "name": "purpose",
+              "value": "prefetch"
+            },
+            {
+              "name": "x-middleware-prefetch",
+              "value": "1"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "x-nextjs-data",
+              "value": "1"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "locationSlug",
+              "value": "rachels-hair-salon-vancouver-3143-cambie-street-et13rtr2"
+            },
+            {
+              "name": "routeCtx",
+              "value": "vi"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "content-encoding",
+              "value": "br"
+            },
+            {
+              "name": "x-cache",
+              "value": "Miss from cloudfront"
+            },
+            {
+              "name": "x-amz-cf-id",
+              "value": "T9Tahjk7BQEzzU4ajXxPHI5L_5scr5ST3kcXYxA2jc7na3hfFIm7qQ=="
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Apr 2026 18:21:02 GMT"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "vary",
+              "value": "Origin,Accept-Encoding"
+            },
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=63072000; includeSubDomains"
+            },
+            {
+              "name": "content-security-policy",
+              "value": "frame-ancestors 'self' https://*.fresha.com https://*.adyen.com"
+            },
+            {
+              "name": "cache-control",
+              "value": "s-maxage=900, stale-while-revalidate=258300"
+            },
+            {
+              "name": "x-nextjs-matched-path",
+              "value": "/[routeCtx]/a/[locationSlug]"
+            },
+            {
+              "name": "referrer-policy",
+              "value": "strict-origin-when-cross-origin"
+            },
+            {
+              "name": "via",
+              "value": "1.1 9ab032e7afbdb06888eedf59ff2a4fd0.cloudfront.net (CloudFront)"
+            },
+            {
+              "name": "x-nextjs-cache",
+              "value": "MISS"
+            },
+            {
+              "name": "x-nextjs-rewrite",
+              "value": "/vi_CA/a/rachels-hair-salon-vancouver-3143-cambie-street-et13rtr2"
+            },
+            {
+              "name": "x-amz-cf-pop",
+              "value": "YVR52-P3"
+            },
+            {
+              "name": "server",
+              "value": "CloudFront"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 69029,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 10868,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "3.175.64.112",
+        "startedDateTime": "2026-04-26T18:21:00.144Z",
+        "time": 454.96599999933096,
+        "timings": {
+          "blocked": 3.861999999645632,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.706,
+          "wait": 448.59900000002096,
+          "receive": 1.7989999996643746,
+          "_blocked_queueing": 2.7069999996456318,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "93517"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 57,
+                "columnNumber": 5427
+              },
+              {
+                "functionName": "c",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 37,
+                "columnNumber": 37485
+              },
+              {
+                "functionName": "S",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 48,
+                "columnNumber": 30869
+              },
+              {
+                "functionName": "k",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 48,
+                "columnNumber": 34079
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "graphqlRequest",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 48,
+                  "columnNumber": 34617
+                },
+                {
+                  "functionName": "h",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 48,
+                  "columnNumber": 35822
+                },
+                {
+                  "functionName": "t",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 15,
+                  "columnNumber": 2473528
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 7599
+                },
+                {
+                  "functionName": "n",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 5807
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 5855
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 21,
+                  "columnNumber": 72385
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 244263
+                },
+                {
+                  "functionName": "i",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 245314
+                },
+                {
+                  "functionName": "_",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 47,
+                  "columnNumber": 34307
+                },
+                {
+                  "functionName": "F",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 47,
+                  "columnNumber": 34716
+                },
+                {
+                  "functionName": "z",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 47,
+                  "columnNumber": 34095
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 244919
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 6141
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 6490
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 8077
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 47,
+                  "columnNumber": 27754
+                },
+                {
+                  "functionName": "onClick",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 47,
+                  "columnNumber": 29559
+                },
+                {
+                  "functionName": "u5",
+                  "scriptId": "17",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                  "lineNumber": 0,
+                  "columnNumber": 141162
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "17",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                  "lineNumber": 0,
+                  "columnNumber": 147248
+                },
+                {
+                  "functionName": "tC",
+                  "scriptId": "17",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                  "lineNumber": 0,
+                  "columnNumber": 23359
+                },
+                {
+                  "functionName": "sr",
+                  "scriptId": "17",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                  "lineNumber": 0,
+                  "columnNumber": 142395
+                },
+                {
+                  "functionName": "cp",
+                  "scriptId": "17",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                  "lineNumber": 0,
+                  "columnNumber": 169620
+                },
+                {
+                  "functionName": "cf",
+                  "scriptId": "17",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                  "lineNumber": 0,
+                  "columnNumber": 169442
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 45,
+                  "columnNumber": 4365
+                }
+              ]
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "GET",
+          "url": "https://www.fresha.com/graphql?extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22ad8aade92b6b3000a18c9dfc9d416eed6ef38fc2d8b8d3cced382be7a089b87a%22%7D%7D&variables=%7B%22aspectRatio%22%3A1%2C%22first%22%3A200%2C%22freshaVerifiedOnly%22%3Afalse%2C%22from%22%3A%7B%22placeId%22%3A%22ChIJoUFSFFp2hlQRBqLVXiR2EQc%22%7D%2C%22geocode%22%3Anull%2C%22hasDeals%22%3Afalse%2C%22hasGroupAppointments%22%3Afalse%2C%22placeId%22%3A%22ChIJoUFSFFp2hlQRBqLVXiR2EQc%22%2C%22query%22%3Anull%2C%22sort%22%3A%22RECOMMENDED%22%2C%22after%22%3A%22WzAuMCwxLjYyMzk5OTk5OTk5OTk5OTksMTIxNTAzOF0%3D%22%7D",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.fresha.com/vi/search?address-name=Metrotown,+Burnaby,+BC,+Canada&place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc&search-place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc"
+            },
+            {
+              "name": "accept-language",
+              "value": "vi-VN-u-ca-gregory-hc-h23-nu-latn"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\""
+            },
+            {
+              "name": "x-graphql-operation-name",
+              "value": "query Search_Venues_Query"
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "x-client-version",
+              "value": "2567b515c77631564f8194baa7a6e0e5b1bc07eb"
+            },
+            {
+              "name": "x-client-platform",
+              "value": "web"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "extensions",
+              "value": "%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22ad8aade92b6b3000a18c9dfc9d416eed6ef38fc2d8b8d3cced382be7a089b87a%22%7D%7D"
+            },
+            {
+              "name": "variables",
+              "value": "%7B%22aspectRatio%22%3A1%2C%22first%22%3A200%2C%22freshaVerifiedOnly%22%3Afalse%2C%22from%22%3A%7B%22placeId%22%3A%22ChIJoUFSFFp2hlQRBqLVXiR2EQc%22%7D%2C%22geocode%22%3Anull%2C%22hasDeals%22%3Afalse%2C%22hasGroupAppointments%22%3Afalse%2C%22placeId%22%3A%22ChIJoUFSFFp2hlQRBqLVXiR2EQc%22%2C%22query%22%3Anull%2C%22sort%22%3A%22RECOMMENDED%22%2C%22after%22%3A%22WzAuMCwxLjYyMzk5OTk5OTk5OTk5OTksMTIxNTAzOF0%3D%22%7D"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "cache-control",
+              "value": "private, max-age=3600"
+            },
+            {
+              "name": "content-encoding",
+              "value": "br"
+            },
+            {
+              "name": "via",
+              "value": "1.1 9ab032e7afbdb06888eedf59ff2a4fd0.cloudfront.net (CloudFront)"
+            },
+            {
+              "name": "x-cache",
+              "value": "Miss from cloudfront"
+            },
+            {
+              "name": "x-amz-cf-id",
+              "value": "etyzS9f2UefuDVHyZ15m83gNSpAk2Oxl2PkRGvC_b4GtUw9_4Vwgcg=="
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Apr 2026 18:21:03 GMT"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "name": "vary",
+              "value": "cloudfront-viewer-country,accept-language,cookie,Accept-Encoding"
+            },
+            {
+              "name": "x-amz-cf-pop",
+              "value": "YVR52-P3"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 231599,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 47075,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "3.175.64.112",
+        "startedDateTime": "2026-04-26T18:21:00.909Z",
+        "time": 401.49099999962345,
+        "timings": {
+          "blocked": 8.438999999259831,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.843,
+          "wait": 387.80699999988155,
+          "receive": 4.402000000482076,
+          "_blocked_queueing": 1.5989999992598314,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "93517"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 57,
+                "columnNumber": 5427
+              },
+              {
+                "functionName": "c",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 37,
+                "columnNumber": 37485
+              },
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 40,
+                "columnNumber": 74014
+              },
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 3,
+                "columnNumber": 77761
+              },
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 3,
+                "columnNumber": 76794
+              },
+              {
+                "functionName": "s",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 3,
+                "columnNumber": 76543
+              },
+              {
+                "functionName": "t.send",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 40,
+                "columnNumber": 73626
+              },
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 40,
+                "columnNumber": 39137
+              },
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 3,
+                "columnNumber": 77761
+              },
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 3,
+                "columnNumber": 76794
+              },
+              {
+                "functionName": "s",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 3,
+                "columnNumber": 76543
+              },
+              {
+                "functionName": "e.send",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 40,
+                "columnNumber": 38404
+              },
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 40,
+                "columnNumber": 38187
+              },
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 3,
+                "columnNumber": 77761
+              },
+              {
+                "functionName": "a",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 3,
+                "columnNumber": 76599
+              }
+            ],
+            "parent": {
+              "description": "Promise.then",
+              "callFrames": [
+                {
+                  "functionName": "u",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 3,
+                  "columnNumber": 76761
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 3,
+                  "columnNumber": 76771
+                },
+                {
+                  "functionName": "s",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 3,
+                  "columnNumber": 76543
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 40,
+                  "columnNumber": 38061
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 40,
+                  "columnNumber": 38026
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 3,
+                  "columnNumber": 77761
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 3,
+                  "columnNumber": 76794
+                },
+                {
+                  "functionName": "s",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 3,
+                  "columnNumber": 76543
+                },
+                {
+                  "functionName": "e.flush",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 40,
+                  "columnNumber": 37487
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 40,
+                  "columnNumber": 37317
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 45,
+                  "columnNumber": 4365
+                }
+              ],
+              "parent": {
+                "description": "setTimeout",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 48,
+                    "columnNumber": 4633
+                  },
+                  {
+                    "functionName": "e.schedule",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 40,
+                    "columnNumber": 37238
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 40,
+                    "columnNumber": 36583
+                  },
+                  {
+                    "functionName": "e.execute",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 40,
+                    "columnNumber": 36478
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 40,
+                    "columnNumber": 49808
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 40,
+                    "columnNumber": 49762
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 3,
+                    "columnNumber": 77761
+                  },
+                  {
+                    "functionName": "a",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 3,
+                    "columnNumber": 76599
+                  }
+                ],
+                "parent": {
+                  "description": "Promise.then",
+                  "callFrames": [
+                    {
+                      "functionName": "u",
+                      "scriptId": "18",
+                      "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                      "lineNumber": 3,
+                      "columnNumber": 76761
+                    },
+                    {
+                      "functionName": "a",
+                      "scriptId": "18",
+                      "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                      "lineNumber": 3,
+                      "columnNumber": 76595
+                    }
+                  ],
+                  "parent": {
+                    "description": "Promise.then",
+                    "callFrames": [
+                      {
+                        "functionName": "u",
+                        "scriptId": "18",
+                        "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                        "lineNumber": 3,
+                        "columnNumber": 76761
+                      },
+                      {
+                        "functionName": "a",
+                        "scriptId": "18",
+                        "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                        "lineNumber": 3,
+                        "columnNumber": 76595
+                      }
+                    ],
+                    "parent": {
+                      "description": "Promise.then",
+                      "callFrames": [
+                        {
+                          "functionName": "u",
+                          "scriptId": "18",
+                          "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                          "lineNumber": 3,
+                          "columnNumber": 76761
+                        },
+                        {
+                          "functionName": "a",
+                          "scriptId": "18",
+                          "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                          "lineNumber": 3,
+                          "columnNumber": 76595
+                        }
+                      ],
+                      "parent": {
+                        "description": "Promise.then",
+                        "callFrames": [
+                          {
+                            "functionName": "u",
+                            "scriptId": "18",
+                            "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                            "lineNumber": 3,
+                            "columnNumber": 76761
+                          },
+                          {
+                            "functionName": "a",
+                            "scriptId": "18",
+                            "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                            "lineNumber": 3,
+                            "columnNumber": 76595
+                          }
+                        ],
+                        "parent": {
+                          "description": "Promise.then",
+                          "callFrames": [
+                            {
+                              "functionName": "u",
+                              "scriptId": "18",
+                              "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                              "lineNumber": 3,
+                              "columnNumber": 76761
+                            },
+                            {
+                              "functionName": "a",
+                              "scriptId": "18",
+                              "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                              "lineNumber": 3,
+                              "columnNumber": 76595
+                            }
+                          ],
+                          "parent": {
+                            "description": "Promise.then",
+                            "callFrames": [
+                              {
+                                "functionName": "u",
+                                "scriptId": "18",
+                                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                "lineNumber": 3,
+                                "columnNumber": 76761
+                              },
+                              {
+                                "functionName": "",
+                                "scriptId": "18",
+                                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                "lineNumber": 3,
+                                "columnNumber": 76771
+                              },
+                              {
+                                "functionName": "s",
+                                "scriptId": "18",
+                                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                "lineNumber": 3,
+                                "columnNumber": 76543
+                              },
+                              {
+                                "functionName": "e.apply",
+                                "scriptId": "18",
+                                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                "lineNumber": 40,
+                                "columnNumber": 47731
+                              },
+                              {
+                                "functionName": "",
+                                "scriptId": "18",
+                                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                "lineNumber": 40,
+                                "columnNumber": 47589
+                              },
+                              {
+                                "functionName": "r",
+                                "scriptId": "18",
+                                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                "lineNumber": 45,
+                                "columnNumber": 4365
+                              }
+                            ],
+                            "parent": {
+                              "description": "setTimeout",
+                              "callFrames": [
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 48,
+                                  "columnNumber": 4633
+                                },
+                                {
+                                  "functionName": "e.scheduleApply",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 47565
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 47463
+                                },
+                                {
+                                  "functionName": "e.push",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 47417
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 55434
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 3,
+                                  "columnNumber": 77761
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 3,
+                                  "columnNumber": 76794
+                                },
+                                {
+                                  "functionName": "s",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 3,
+                                  "columnNumber": 76543
+                                },
+                                {
+                                  "functionName": "e.process",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 55120
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 192820
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 3,
+                                  "columnNumber": 77761
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 3,
+                                  "columnNumber": 76794
+                                },
+                                {
+                                  "functionName": "s",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 3,
+                                  "columnNumber": 76543
+                                },
+                                {
+                                  "functionName": "t.process",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 192333
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 54464
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 3,
+                                  "columnNumber": 77761
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 3,
+                                  "columnNumber": 76794
+                                },
+                                {
+                                  "functionName": "s",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 3,
+                                  "columnNumber": 76543
+                                },
+                                {
+                                  "functionName": "e.dispatch",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 54362
+                                },
+                                {
+                                  "functionName": "e.track",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 53195
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 3067
+                                },
+                                {
+                                  "functionName": "track",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 208479
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "19",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                  "lineNumber": 0,
+                                  "columnNumber": 11734
+                                },
+                                {
+                                  "functionName": "Z.m3.track",
+                                  "scriptId": "19",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                  "lineNumber": 0,
+                                  "columnNumber": 11839
+                                },
+                                {
+                                  "functionName": "searchResultsReturned",
+                                  "scriptId": "18",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                  "lineNumber": 40,
+                                  "columnNumber": 213787
+                                },
+                                {
+                                  "functionName": "onSuccess",
+                                  "scriptId": "130",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/1646-3811c1fdaba7949d.js",
+                                  "lineNumber": 0,
+                                  "columnNumber": 63974
+                                },
+                                {
+                                  "functionName": "",
+                                  "scriptId": "19",
+                                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                  "lineNumber": 41,
+                                  "columnNumber": 244547
+                                }
+                              ],
+                              "parent": {
+                                "description": "await",
+                                "callFrames": [
+                                  {
+                                    "functionName": "i",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 41,
+                                    "columnNumber": 245314
+                                  },
+                                  {
+                                    "functionName": "_",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 47,
+                                    "columnNumber": 34307
+                                  },
+                                  {
+                                    "functionName": "F",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 47,
+                                    "columnNumber": 34716
+                                  },
+                                  {
+                                    "functionName": "z",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 47,
+                                    "columnNumber": 34095
+                                  },
+                                  {
+                                    "functionName": "",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 41,
+                                    "columnNumber": 244919
+                                  },
+                                  {
+                                    "functionName": "",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 41,
+                                    "columnNumber": 6141
+                                  },
+                                  {
+                                    "functionName": "",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 41,
+                                    "columnNumber": 6490
+                                  },
+                                  {
+                                    "functionName": "",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 41,
+                                    "columnNumber": 8077
+                                  },
+                                  {
+                                    "functionName": "",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 47,
+                                    "columnNumber": 27754
+                                  },
+                                  {
+                                    "functionName": "onClick",
+                                    "scriptId": "19",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                                    "lineNumber": 47,
+                                    "columnNumber": 29559
+                                  },
+                                  {
+                                    "functionName": "u5",
+                                    "scriptId": "17",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 141162
+                                  },
+                                  {
+                                    "functionName": "",
+                                    "scriptId": "17",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 147248
+                                  },
+                                  {
+                                    "functionName": "tC",
+                                    "scriptId": "17",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 23359
+                                  },
+                                  {
+                                    "functionName": "sr",
+                                    "scriptId": "17",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 142395
+                                  },
+                                  {
+                                    "functionName": "cp",
+                                    "scriptId": "17",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 169620
+                                  },
+                                  {
+                                    "functionName": "cf",
+                                    "scriptId": "17",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                                    "lineNumber": 0,
+                                    "columnNumber": 169442
+                                  },
+                                  {
+                                    "functionName": "r",
+                                    "scriptId": "18",
+                                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                                    "lineNumber": 45,
+                                    "columnNumber": 4365
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://www.fresha.com/plumbus/2/httpapi",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.fresha.com/vi/search?address-name=Metrotown,+Burnaby,+BC,+Canada&place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc&search-place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "*/*"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\""
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 1851,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"api_key\":\"29e2cb5b7d55e4c4dcfa427e0f9fc784\",\"events\":[{\"device_id\":\"fe16e2eb-917b-4320-a1da-557e0b997714\",\"session_id\":1777226460385,\"time\":1777227661322,\"app_version\":\"2567b515c77631564f8194baa7a6e0e5b1bc07eb\",\"platform\":\"Web\",\"language\":\"vi-VN\",\"ip\":\"$remote\",\"insert_id\":\"95e55784-49b2-49d6-b9d3-20469d3784e2\",\"plan\":{\"version\":\"29\",\"branch\":\"main\",\"source\":\"app-b2c-spa\",\"versionId\":\"d8c91619-b0ec-4590-9111-0b23ff08a7bf\"},\"ingestion_metadata\":{\"source_name\":\"browser-typescript-ampli\",\"source_version\":\"2.0.0\"},\"event_properties\":{\"page_url\":\"https://www.fresha.com/vi/search?address-name=Metrotown,+Burnaby,+BC,+Canada&place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc&search-place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc\",\"search_results_count\":73,\"search_by_type\":\"venue\",\"top10_result_ids\":[\"1247796\",\"1252796\",\"1286171\",\"1294762\",\"1322260\",\"1340987\",\"1373802\",\"1379966\",\"1384185\",\"1424969\"],\"search_filters_applied\":[],\"sort_type\":\"recommended\",\"[Amplitude] Page Domain\":\"www.fresha.com\",\"[Amplitude] Page Location\":\"https://www.fresha.com/vi/search?address-name=Metrotown,+Burnaby,+BC,+Canada&place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc&search-place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc\",\"[Amplitude] Page Path\":\"/vi/search\",\"[Amplitude] Page Title\":\"Fresha - Đặt ngay tiệm làm đẹp và spa gần đây\",\"[Amplitude] Page URL\":\"https://www.fresha.com/vi/search\",\"[Amplitude] Previous Page Location\":\"https://www.fresha.com/vi?search-place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc\",\"[Amplitude] Previous Page Type\":\"internal\"},\"event_type\":\"search_results_returned\",\"event_id\":317,\"library\":\"amplitude-ts/2.40.0\",\"user_agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36\"}],\"options\":{\"min_id_length\":2},\"client_upload_time\":\"2026-04-26T18:21:03.296Z\",\"request_metadata\":{\"sdk\":{\"metrics\":{\"histogram\":{}}}}}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "strict-transport-security",
+              "value": "max-age=15768000"
+            },
+            {
+              "name": "referrer-policy",
+              "value": "strict-origin-when-cross-origin"
+            },
+            {
+              "name": "via",
+              "value": "1.1 9ab032e7afbdb06888eedf59ff2a4fd0.cloudfront.net (CloudFront)"
+            },
+            {
+              "name": "x-content-type-options",
+              "value": "nosniff"
+            },
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "x-cache",
+              "value": "Miss from cloudfront"
+            },
+            {
+              "name": "content-length",
+              "value": "93"
+            },
+            {
+              "name": "x-amz-cf-id",
+              "value": "S4riU5ceHb_cicGpVJPHZys9IpEZ-Wo6zdzzPN5bjMlfmOgqMbMnHA=="
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Apr 2026 18:21:05 GMT"
+            },
+            {
+              "name": "x-xss-protection",
+              "value": "1; mode=block"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "x-amz-cf-pop",
+              "value": "YVR52-P3"
+            },
+            {
+              "name": "x-frame-options",
+              "value": "SAMEORIGIN"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 93,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 481,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "3.175.64.112",
+        "startedDateTime": "2026-04-26T18:21:03.296Z",
+        "time": 467.2549999995681,
+        "timings": {
+          "blocked": 1.7760000000569272,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.662,
+          "wait": 464.0949999997424,
+          "receive": 0.721999999768741,
+          "_blocked_queueing": 0.8330000000569271,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "93517"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 57,
+                "columnNumber": 5427
+              },
+              {
+                "functionName": "c",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 37,
+                "columnNumber": 37485
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 46372
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 44186
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 44291
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 43212
+              },
+              {
+                "functionName": "m",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 42961
+              },
+              {
+                "functionName": "e.sendMetrics",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 46132
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 47218
+              },
+              {
+                "functionName": "r",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 45,
+                "columnNumber": 4365
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://b2c-web-ff.fresha.com/proxy/client/metrics",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.fresha.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 839,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"bucket\":{\"start\":\"2026-04-26T18:20:35.295Z\",\"stop\":\"2026-04-26T18:21:05.289Z\",\"toggles\":{\"B2C_WEB_SEARCH_DEBUG\":{\"yes\":0,\"no\":706,\"variants\":{}},\"B2C_WEB_ACTIVITY_PRODUCT_ORDER_DETAILS\":{\"yes\":8,\"no\":0,\"variants\":{}},\"B2C_WEB_CUSTOMER_CONNECT\":{\"yes\":0,\"no\":8,\"variants\":{}},\"B2C_WEB_ENABLE_PERSISTED_OPERATIONS\":{\"yes\":2,\"no\":0,\"variants\":{}},\"B2C_WEB_SEARCH_FULL_TEXT\":{\"yes\":0,\"no\":24,\"variants\":{}},\"B2C_WEB_SEARCH_CLUSTERS_PROFESSIONALS\":{\"yes\":0,\"no\":4,\"variants\":{}},\"B2C_WEB_SEARCH_CLUSTERS_VENUES\":{\"yes\":0,\"no\":4,\"variants\":{}},\"B2C_WEB_SEARCH_ZOOM_TO_RESULTS\":{\"yes\":0,\"no\":8,\"variants\":{}},\"B2C_WEB_SEARCH_DISTANCE_FROM\":{\"yes\":8,\"no\":0,\"variants\":{}},\"B2C_WEB_SEARCH_PRICE_HISTOGRAM\":{\"yes\":0,\"no\":4,\"variants\":{}},\"B2C_WEB_SEARCH_RADIUS_OVERSCAN\":{\"yes\":0,\"no\":2,\"variants\":{}}}},\"appName\":\"b2c-spa\",\"instanceId\":\"browser\"}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-expose-headers",
+              "value": "ETag"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Apr 2026 18:21:07 GMT"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\""
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 179,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "76.223.116.25",
+        "startedDateTime": "2026-04-26T18:21:05.290Z",
+        "time": 161.604000000807,
+        "timings": {
+          "blocked": 80.31500000074966,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.5489999999999999,
+          "wait": 79.97700000005105,
+          "receive": 0.7630000000062864,
+          "_blocked_queueing": 79.26900000074966,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "116847"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 57,
+                "columnNumber": 5427
+              },
+              {
+                "functionName": "c",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 37,
+                "columnNumber": 37485
+              },
+              {
+                "functionName": "S",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 48,
+                "columnNumber": 30869
+              },
+              {
+                "functionName": "k",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 48,
+                "columnNumber": 34079
+              }
+            ],
+            "parent": {
+              "description": "await",
+              "callFrames": [
+                {
+                  "functionName": "graphqlRequest",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 48,
+                  "columnNumber": 34617
+                },
+                {
+                  "functionName": "h",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 48,
+                  "columnNumber": 35822
+                },
+                {
+                  "functionName": "t",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 15,
+                  "columnNumber": 2473528
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 87287
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 21,
+                  "columnNumber": 72421
+                },
+                {
+                  "functionName": "",
+                  "scriptId": "19",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                  "lineNumber": 41,
+                  "columnNumber": 244263
+                },
+                {
+                  "functionName": "r",
+                  "scriptId": "18",
+                  "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                  "lineNumber": 45,
+                  "columnNumber": 4365
+                }
+              ],
+              "parent": {
+                "description": "requestAnimationFrame",
+                "callFrames": [
+                  {
+                    "functionName": "",
+                    "scriptId": "18",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                    "lineNumber": 48,
+                    "columnNumber": 4691
+                  },
+                  {
+                    "functionName": "I",
+                    "scriptId": "19",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                    "lineNumber": 47,
+                    "columnNumber": 32941
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "19",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                    "lineNumber": 41,
+                    "columnNumber": 245451
+                  },
+                  {
+                    "functionName": "o2",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 93633
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98715
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99246
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98739
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99319
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 98702
+                  },
+                  {
+                    "functionName": "ix",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 108886
+                  },
+                  {
+                    "functionName": "ic",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 99030
+                  },
+                  {
+                    "functionName": "uN",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 134068
+                  },
+                  {
+                    "functionName": "uz",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 132462
+                  },
+                  {
+                    "functionName": "uf",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 118450
+                  },
+                  {
+                    "functionName": "uc",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 116896
+                  },
+                  {
+                    "functionName": "uJ",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 138814
+                  },
+                  {
+                    "functionName": "uK",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 137027
+                  },
+                  {
+                    "functionName": "uG",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 137372
+                  },
+                  {
+                    "functionName": "",
+                    "scriptId": "17",
+                    "url": "https://www.fresha.com/assets/_next/static/chunks/framework-1ee8ffe1cdb58891.js",
+                    "lineNumber": 0,
+                    "columnNumber": 136656
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "GET",
+          "url": "https://www.fresha.com/graphql?extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22db8da7edc92faae9b145fe2b2b31218359404909804bceb77f21b015adf48db5%22%7D%7D",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.fresha.com/vi/search?address-name=Metrotown,+Burnaby,+BC,+Canada&place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc&search-place-id=ChIJoUFSFFp2hlQRBqLVXiR2EQc"
+            },
+            {
+              "name": "accept-language",
+              "value": "vi-VN-u-ca-gregory-hc-h23-nu-latn"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\""
+            },
+            {
+              "name": "x-graphql-operation-name",
+              "value": "query LibViewer_BasicProfile_Query"
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "x-client-version",
+              "value": "2567b515c77631564f8194baa7a6e0e5b1bc07eb"
+            },
+            {
+              "name": "x-client-platform",
+              "value": "web"
+            }
+          ],
+          "queryString": [
+            {
+              "name": "extensions",
+              "value": "%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22db8da7edc92faae9b145fe2b2b31218359404909804bceb77f21b015adf48db5%22%7D%7D"
+            }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "cache-control",
+              "value": "no-store"
+            },
+            {
+              "name": "via",
+              "value": "1.1 9ab032e7afbdb06888eedf59ff2a4fd0.cloudfront.net (CloudFront)"
+            },
+            {
+              "name": "x-cache",
+              "value": "Miss from cloudfront"
+            },
+            {
+              "name": "content-length",
+              "value": "25"
+            },
+            {
+              "name": "x-amz-cf-id",
+              "value": "etaVVjEtPlf9AD_CwQ8EFqJZo0FFOGPbGDt2nY5ULp3D_7s1ZdUzXQ=="
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Apr 2026 18:22:05 GMT"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "name": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "name": "vary",
+              "value": "cloudfront-viewer-country,accept-language,cookie"
+            },
+            {
+              "name": "x-amz-cf-pop",
+              "value": "YVR52-P3"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 25,
+            "mimeType": "application/json"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 557,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "3.175.64.112",
+        "startedDateTime": "2026-04-26T18:22:03.811Z",
+        "time": 98.00100000029488,
+        "timings": {
+          "blocked": 1.3230000006984337,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.43700000000000006,
+          "wait": 92.98400000020256,
+          "receive": 3.2569999993938836,
+          "_blocked_queueing": 0.7140000006984337,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "93517"
+      },
+      {
+        "_initiator": {
+          "type": "script",
+          "stack": {
+            "callFrames": [
+              {
+                "functionName": "",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 57,
+                "columnNumber": 5427
+              },
+              {
+                "functionName": "c",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 37,
+                "columnNumber": 37485
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 46372
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 44186
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 44291
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 43212
+              },
+              {
+                "functionName": "m",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 42961
+              },
+              {
+                "functionName": "e.sendMetrics",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 46132
+              },
+              {
+                "functionName": "",
+                "scriptId": "19",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/pages/_app-a3eefc6b29c13a26.js",
+                "lineNumber": 47,
+                "columnNumber": 47218
+              },
+              {
+                "functionName": "r",
+                "scriptId": "18",
+                "url": "https://www.fresha.com/assets/_next/static/chunks/main-2b146b2128c02be5.js",
+                "lineNumber": 45,
+                "columnNumber": 4365
+              }
+            ]
+          }
+        },
+        "_priority": "High",
+        "_resourceType": "fetch",
+        "cache": {},
+        "connection": "443",
+        "request": {
+          "method": "POST",
+          "url": "https://b2c-web-ff.fresha.com/proxy/client/metrics",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Windows\""
+            },
+            {
+              "name": "Referer",
+              "value": "https://www.fresha.com/"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Google Chrome\";v=\"147\", \"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"147\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 390,
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"bucket\":{\"start\":\"2026-04-26T18:21:35.292Z\",\"stop\":\"2026-04-26T18:22:04.905Z\",\"toggles\":{\"B2C_WEB_ACTIVITY_PRODUCT_ORDER_DETAILS\":{\"yes\":4,\"no\":0,\"variants\":{}},\"B2C_WEB_CUSTOMER_CONNECT\":{\"yes\":0,\"no\":4,\"variants\":{}},\"B2C_WEB_ENABLE_PERSISTED_OPERATIONS\":{\"yes\":1,\"no\":0,\"variants\":{}},\"B2C_WEB_SEARCH_DEBUG\":{\"yes\":0,\"no\":48,\"variants\":{}}}},\"appName\":\"b2c-spa\",\"instanceId\":\"browser\"}"
+          }
+        },
+        "response": {
+          "status": 200,
+          "statusText": "",
+          "httpVersion": "http/2.0",
+          "headers": [
+            {
+              "name": "access-control-allow-origin",
+              "value": "*"
+            },
+            {
+              "name": "access-control-expose-headers",
+              "value": "ETag"
+            },
+            {
+              "name": "content-length",
+              "value": "2"
+            },
+            {
+              "name": "date",
+              "value": "Sun, 26 Apr 2026 18:22:07 GMT"
+            },
+            {
+              "name": "etag",
+              "value": "W/\"2-nOO9QiTIwXgNtWtBJezz8kv3SLc\""
+            },
+            {
+              "name": "content-type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "name": "vary",
+              "value": "Accept-Encoding"
+            }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 2,
+            "mimeType": "text/plain"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1,
+          "_transferSize": 179,
+          "_error": null,
+          "_fetchedViaServiceWorker": false
+        },
+        "serverIPAddress": "76.223.116.25",
+        "startedDateTime": "2026-04-26T18:22:04.906Z",
+        "time": 155.02999999989697,
+        "timings": {
+          "blocked": 82.48999999990454,
+          "dns": -1,
+          "ssl": -1,
+          "connect": -1,
+          "send": 0.4949999999999999,
+          "wait": 71.0369999998089,
+          "receive": 1.0080000001835288,
+          "_blocked_queueing": 81.58499999990454,
+          "_workerStart": -1,
+          "_workerReady": -1,
+          "_workerFetchStart": -1,
+          "_workerRespondWithSettled": -1
+        },
+        "_connectionId": "116847"
+      }
+    ]
+  }
+}

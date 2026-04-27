@@ -63,8 +63,8 @@ export async function GET(
                 name: item.name,
                 durationCaption: item.caption || null,
                 priceFormatted: item.price?.formatted || null,
-                priceValueMin: prices.min,
-                priceValueMax: prices.max,
+                priceValueMin: prices.min != null ? Math.round(prices.min) : null,
+                priceValueMax: prices.max != null ? Math.round(prices.max) : null,
                 catalogId: ids.catalogId,
                 fetchedAt: new Date(),
               });

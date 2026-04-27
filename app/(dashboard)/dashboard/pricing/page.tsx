@@ -22,12 +22,12 @@ import {
   Users,
   DollarSign,
   TrendingUp,
-  BarChart3,
 } from 'lucide-react';
 
 import MenuImport from '@/components/pricing/menu-import';
 import PercentileChart from '@/components/pricing/percentile-chart';
 import AddressAutocomplete from '@/components/pricing/address-autocomplete';
+import type { MapVisualizationMode } from '@/components/pricing/competitor-map';
 
 const CompetitorMap = dynamic(
   () => import('@/components/pricing/competitor-map'),
@@ -80,17 +80,16 @@ type MatchResult = {
 type FreshaDebugQuery = {
   endpoint: string;
   headers: Record<string, string>;
-  query: string;
+  graphqlQuery: string;
   variables: Record<string, unknown>;
   body: string;
 };
 
 type FreshaDebugData = {
-  withPlaceId?: FreshaDebugQuery;
-  withLatLng?: FreshaDebugQuery;
+  request?: FreshaDebugQuery;
 };
 
-const radiusOptions = [1, 3, 5, 10, 25];
+const radiusOptions = [1, 3, 5, 10, 25, 50, 100];
 
 function formatRelativeTime(iso: string): string {
   const date = new Date(iso);
@@ -292,8 +291,13 @@ export default function PricingPage() {
   const [userMenuItems, setUserMenuItems] = useState<UserMenuItem[]>([]);
   const [matchResults, setMatchResults] = useState<MatchResult[] | null>(null);
   const [analyzing, setAnalyzing] = useState(false);
-  const [mapViewMode, setMapViewMode] = useState<'reputation' | 'pricing'>('reputation');
+  const [mapMode, setMapMode] = useState<MapVisualizationMode>('reputation');
+  const [pricingServiceName, setPricingServiceName] = useState<string>('');
+  const [mapTransitioning, setMapTransitioning] = useState(false);
   const [freshaDebug, setFreshaDebug] = useState<FreshaDebugData | null>(null);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [endCursor, setEndCursor] = useState<string | null>(null);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -305,6 +309,8 @@ export default function PricingPage() {
     setIsStale({});
     setExpandedId(null);
     setMatchResults(null);
+    setHasNextPage(false);
+    setEndCursor(null);
 
     // If we have place details from autocomplete, pre-set the map center
     // so the map appears instantly while the search request is in flight
@@ -355,6 +361,8 @@ export default function PricingPage() {
       const list: Competitor[] = data.competitors ?? [];
       setCompetitors(list);
       setFreshaDebug(data.freshaDebug ?? null);
+      setHasNextPage(data.pageInfo?.hasNextPage ?? false);
+      setEndCursor(data.pageInfo?.endCursor ?? null);
       if (typeof data.centerLat === 'number') setCenterLat(data.centerLat);
       if (typeof data.centerLng === 'number') setCenterLng(data.centerLng);
       if (typeof data.radiusKm === 'number') setSearchRadiusKm(data.radiusKm);
@@ -391,6 +399,92 @@ export default function PricingPage() {
     }
   };
 
+  const handleFetchMore = async () => {
+    if (!endCursor || isFetchingMore) return;
+    setIsFetchingMore(true);
+    setError(null);
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+    try {
+      const res = await Promise.race([
+        fetch('/api/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            address,
+            radiusKm,
+            businessType,
+            ...(placeDetails && {
+              placeId: placeDetails.placeId,
+              lat: placeDetails.lat,
+              lng: placeDetails.lng,
+            }),
+            after: endCursor,
+          }),
+          signal: controller.signal,
+        }),
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('Request timed out')), 30000)
+        ),
+      ]);
+
+      clearTimeout(timeoutId);
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Fetch more failed');
+      }
+
+      const data = await res.json();
+      const newCompetitors: Competitor[] = data.competitors ?? [];
+      setCompetitors((prev) => [...(prev ?? []), ...newCompetitors]);
+      setFreshaDebug(data.freshaDebug ?? null);
+      setHasNextPage(data.pageInfo?.hasNextPage ?? false);
+      setEndCursor(data.pageInfo?.endCursor ?? null);
+
+      // Fetch menus in background for newly loaded competitors
+      if (newCompetitors.length > 0) {
+        const ids = newCompetitors.map((c) => c.id);
+        setFetchingMenus(true);
+        fetch('/api/competitors/bulk-services', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ competitorIds: ids }),
+        })
+          .then((r) => r.json())
+          .then((bulkData) => {
+            setServicesByCompetitor((prev) => ({
+              ...prev,
+              ...(bulkData.servicesByCompetitor ?? {}),
+            }));
+            setLastUpdated((prev) => ({
+              ...prev,
+              ...(bulkData.lastUpdated ?? {}),
+            }));
+            setIsStale((prev) => ({
+              ...prev,
+              ...(bulkData.isStale ?? {}),
+            }));
+          })
+          .catch((err) => {
+            console.warn('Bulk services fetch failed:', err);
+          })
+          .finally(() => setFetchingMenus(false));
+      }
+    } catch (err) {
+      if (err instanceof Error && err.name === 'AbortError') {
+        setError('Request timed out. Please try again.');
+      } else {
+        setError(err instanceof Error ? err.message : 'Something went wrong');
+      }
+    } finally {
+      clearTimeout(timeoutId);
+      setIsFetchingMore(false);
+    }
+  };
+
   const handleAnalyzeMenu = async () => {
     if (userMenuItems.length === 0) {
       setError('Add some menu items first before analyzing.');
@@ -398,6 +492,11 @@ export default function PricingPage() {
     }
     if (!competitors || competitors.length === 0) {
       setError('Search for competitors first before analyzing your menu.');
+      return;
+    }
+    const serviceCount = Object.values(servicesByCompetitor).flat().length;
+    if (serviceCount === 0) {
+      setError('Competitor menus are still loading. Please wait a moment and try again.');
       return;
     }
 
@@ -414,9 +513,18 @@ export default function PricingPage() {
           competitorServices: servicesByCompetitor,
         }),
       });
-      if (!res.ok) throw new Error('Analysis failed');
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Analysis failed');
+      }
       const data = await res.json();
-      setMatchResults(data.results ?? []);
+      const results = data.results ?? [];
+      // Warn if nothing matched
+      const totalMatches = results.reduce((sum: number, r: { prices: number[] }) => sum + r.prices.length, 0);
+      if (totalMatches === 0) {
+        setError('No competitor services matched your menu items. Try adding more generic names (e.g. "Manicure" instead of "Classic Manicure").');
+      }
+      setMatchResults(results);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Analysis failed');
     } finally {
@@ -425,7 +533,7 @@ export default function PricingPage() {
   };
 
   return (
-    <section className="flex-1 p-4 lg:p-8 max-w-7xl mx-auto">
+    <section className="flex-1 p-4 lg:p-6 w-full">
       <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
         Competitor Pricing
       </h1>
@@ -515,54 +623,28 @@ export default function PricingPage() {
           {/* Dev-only: Fresha debug panel */}
           {process.env.NODE_ENV === 'development' && freshaDebug && (
             <div className="mt-4 border rounded-md bg-gray-50 space-y-3">
-              {freshaDebug.withPlaceId && (
+              {freshaDebug.request && (
                 <details className="group">
                   <summary className="cursor-pointer px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 flex items-center justify-between">
-                    <span>🔧 Fresha Debug — Google Place ID</span>
-                    <span className="text-xs text-gray-400">{String(freshaDebug.withPlaceId?.variables?.placeId ?? '—')}</span>
+                    <span>🔧 Fresha Debug — Search Request</span>
+                    <span className="text-xs text-gray-400">{String(freshaDebug.request?.variables?.placeId ?? '—')}</span>
                   </summary>
                   <div className="px-4 pb-4 space-y-3 text-xs font-mono">
                     <div>
                       <p className="font-semibold text-gray-600 mb-1">Endpoint:</p>
-                      <code className="block bg-white border rounded px-2 py-1 break-all">{freshaDebug.withPlaceId?.endpoint ?? '—'}</code>
+                      <code className="block bg-white border rounded px-2 py-1 break-all">{freshaDebug.request?.endpoint ?? '—'}</code>
                     </div>
                     <div>
                       <p className="font-semibold text-gray-600 mb-1">Headers:</p>
-                      <pre className="bg-white border rounded px-2 py-1 overflow-auto max-h-40">{JSON.stringify(freshaDebug.withPlaceId?.headers ?? {}, null, 2)}</pre>
+                      <pre className="bg-white border rounded px-2 py-1 overflow-auto max-h-40">{JSON.stringify(freshaDebug.request?.headers ?? {}, null, 2)}</pre>
                     </div>
                     <div>
                       <p className="font-semibold text-gray-600 mb-1">Variables:</p>
-                      <pre className="bg-white border rounded px-2 py-1 overflow-auto max-h-40">{JSON.stringify(freshaDebug.withPlaceId?.variables ?? {}, null, 2)}</pre>
+                      <pre className="bg-white border rounded px-2 py-1 overflow-auto max-h-40">{JSON.stringify(freshaDebug.request?.variables ?? {}, null, 2)}</pre>
                     </div>
                     <div>
                       <p className="font-semibold text-gray-600 mb-1">Full Body:</p>
-                      <pre className="bg-white border rounded px-2 py-1 overflow-auto max-h-60">{freshaDebug.withPlaceId?.body ?? '—'}</pre>
-                    </div>
-                  </div>
-                </details>
-              )}
-              {freshaDebug.withLatLng && (
-                <details className="group">
-                  <summary className="cursor-pointer px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 flex items-center justify-between">
-                    <span>🔧 Fresha Debug — Lat,Lng</span>
-                    <span className="text-xs text-gray-400">{String(freshaDebug.withLatLng?.variables?.placeId ?? '—')}</span>
-                  </summary>
-                  <div className="px-4 pb-4 space-y-3 text-xs font-mono">
-                    <div>
-                      <p className="font-semibold text-gray-600 mb-1">Endpoint:</p>
-                      <code className="block bg-white border rounded px-2 py-1 break-all">{freshaDebug.withLatLng?.endpoint ?? '—'}</code>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-600 mb-1">Headers:</p>
-                      <pre className="bg-white border rounded px-2 py-1 overflow-auto max-h-40">{JSON.stringify(freshaDebug.withLatLng?.headers ?? {}, null, 2)}</pre>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-600 mb-1">Variables:</p>
-                      <pre className="bg-white border rounded px-2 py-1 overflow-auto max-h-40">{JSON.stringify(freshaDebug.withLatLng?.variables ?? {}, null, 2)}</pre>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-600 mb-1">Full Body:</p>
-                      <pre className="bg-white border rounded px-2 py-1 overflow-auto max-h-60">{freshaDebug.withLatLng?.body ?? '—'}</pre>
+                      <pre className="bg-white border rounded px-2 py-1 overflow-auto max-h-60">{freshaDebug.request?.body ?? '—'}</pre>
                     </div>
                   </div>
                 </details>
@@ -600,14 +682,64 @@ export default function PricingPage() {
               )}
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
-            <CompetitorMap
-              competitors={competitors ?? []}
-              centerLat={centerLat}
-              centerLng={centerLng}
-              radiusKm={searchRadiusKm}
-              servicesByCompetitor={servicesByCompetitor}
-            />
+          <CardContent className="p-0 relative">
+            <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 border-b flex-wrap">
+              <span className="text-xs text-muted-foreground">Map view:</span>
+              <select
+                value={mapMode}
+                onChange={(e) => {
+                  const newMode = e.target.value as MapVisualizationMode;
+                  setMapTransitioning(true);
+                  setMapMode(newMode);
+                  setTimeout(() => setMapTransitioning(false), 400);
+                }}
+                className="h-7 text-xs rounded-md border border-input bg-white px-2 py-0.5 outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              >
+                <option value="reputation">Reputation (reviews)</option>
+                <option value="pricing">Pricing</option>
+                <option value="popularity">Popularity (reviews × rating)</option>
+              </select>
+
+              {mapMode === 'pricing' && (
+                <>
+                  <span className="text-xs text-muted-foreground">Service:</span>
+                  <select
+                    value={pricingServiceName}
+                    onChange={(e) => {
+                      setMapTransitioning(true);
+                      setPricingServiceName(e.target.value);
+                      setTimeout(() => setMapTransitioning(false), 400);
+                    }}
+                    className="h-7 text-xs rounded-md border border-input bg-white px-2 py-0.5 outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  >
+                    <option value="">Average price (all services)</option>
+                    {Array.from(new Set(Object.values(servicesByCompetitor).flat().map((s) => s.name))).sort().map((name) => (
+                      <option key={name} value={name}>{name}</option>
+                    ))}
+                  </select>
+                </>
+              )}
+            </div>
+
+            <div className={`relative transition-opacity duration-300 ${mapTransitioning ? 'opacity-50' : 'opacity-100'}`}>
+              <CompetitorMap
+                competitors={competitors ?? []}
+                centerLat={centerLat}
+                centerLng={centerLng}
+                radiusKm={searchRadiusKm}
+                servicesByCompetitor={servicesByCompetitor}
+                mode={mapMode}
+                pricingServiceName={pricingServiceName || null}
+              />
+              {mapTransitioning && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="bg-white/80 backdrop-blur-sm rounded-lg px-4 py-2 shadow-sm flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin text-orange-500" />
+                    <span className="text-sm text-gray-700">Updating map…</span>
+                  </div>
+                </div>
+              )}
+            </div>
           </CardContent>
         </Card>
       )}
@@ -807,6 +939,26 @@ export default function PricingPage() {
                 </Card>
               ))}
             </div>
+
+            {hasNextPage && (
+              <div className="flex justify-center pt-4">
+                <Button
+                  onClick={handleFetchMore}
+                  disabled={isFetchingMore}
+                  variant="outline"
+                  className="min-w-[160px]"
+                >
+                  {isFetchingMore ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Fetching…
+                    </>
+                  ) : (
+                    'Fetch More'
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}

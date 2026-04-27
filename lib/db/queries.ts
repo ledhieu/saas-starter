@@ -1,6 +1,6 @@
-import { desc, and, eq, isNull } from 'drizzle-orm';
+import { desc, and, eq, isNull, gte, lt } from 'drizzle-orm';
 import { db } from './drizzle';
-import { activityLogs, teamMembers, teams, users } from './schema';
+import { activityLogs, teamMembers, teams, users, searchSessions, searchSessionCompetitors, serviceAuditLog } from './schema';
 import { cookies } from 'next/headers';
 import { verifyToken } from '@/lib/auth/session';
 
@@ -127,4 +127,137 @@ export async function getTeamForUser() {
   });
 
   return result?.team || null;
+}
+
+export async function saveSearchSession(params: {
+  userId: number;
+  addressQuery: string;
+  radiusKm: number;
+  businessType: string | null;
+  lat: number;
+  lng: number;
+  resultsCount: number;
+  competitorIds: number[];
+  competitorLatLngs: Array<{ id: number; latitude: string | null; longitude: string | null }>;
+  cursor?: string | null;
+}) {
+  const { userId, addressQuery, radiusKm, businessType, lat, lng, resultsCount, competitorIds, competitorLatLngs, cursor } = params;
+
+  const [session] = await db
+    .insert(searchSessions)
+    .values({
+      userId,
+      addressQuery,
+      radiusKm,
+      businessType,
+      latitude: String(lat),
+      longitude: String(lng),
+      resultsCount,
+      cursor: cursor || null,
+    })
+    .returning();
+
+  if (!session || competitorIds.length === 0) {
+    return session;
+  }
+
+  const competitorMap = new Map(competitorLatLngs.map((c) => [c.id, c]));
+
+  const haversineKm = (lat1: number, lng1: number, lat2: number, lng2: number) => {
+    const R = 6371;
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLng = ((lng2 - lng1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  };
+
+  const joinRows = competitorIds.map((cid) => {
+    const c = competitorMap.get(cid);
+    let distanceKm = null as string | null;
+    if (c?.latitude && c?.longitude) {
+      distanceKm = String(haversineKm(lat, lng, parseFloat(c.latitude), parseFloat(c.longitude)));
+    }
+    return {
+      sessionId: session.id,
+      competitorId: cid,
+      distanceKm,
+    };
+  });
+
+  await db.insert(searchSessionCompetitors).values(joinRows);
+
+  return session;
+}
+
+/**
+ * Record a service change in the audit log.
+ * Same-day changes are upserted — only the latest delta for the day is kept.
+ * If oldValue === newValue after upsert, the row is deleted (no meaningful change).
+ */
+export async function recordServiceChange(params: {
+  competitorId: number;
+  catalogId: string | null;
+  serviceName: string;
+  field: string;
+  oldValue: string | null;
+  newValue: string | null;
+}) {
+  const { competitorId, catalogId, serviceName, field, oldValue, newValue } = params;
+
+  if (oldValue === newValue) return;
+
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const endOfDay = new Date(startOfDay);
+  endOfDay.setDate(endOfDay.getDate() + 1);
+
+  const baseMatch = and(
+    eq(serviceAuditLog.competitorId, competitorId),
+    eq(serviceAuditLog.field, field),
+    eq(serviceAuditLog.serviceName, serviceName),
+    gte(serviceAuditLog.changedAt, startOfDay),
+    lt(serviceAuditLog.changedAt, endOfDay)
+  );
+
+  const catalogMatch = catalogId
+    ? eq(serviceAuditLog.catalogId, catalogId)
+    : isNull(serviceAuditLog.catalogId);
+
+  const existing = await db
+    .select()
+    .from(serviceAuditLog)
+    .where(and(baseMatch, catalogMatch))
+    .limit(1);
+
+  if (existing.length > 0) {
+    const row = existing[0];
+    const netOld = row.oldValue;
+    if (netOld === newValue) {
+      // Net change for the day is zero — delete the row
+      await db.delete(serviceAuditLog).where(eq(serviceAuditLog.id, row.id));
+      return;
+    }
+    // Update the existing day's entry with the latest newValue
+    await db
+      .update(serviceAuditLog)
+      .set({ newValue, changedAt: now })
+      .where(eq(serviceAuditLog.id, row.id));
+    return;
+  }
+
+  await db.insert(serviceAuditLog).values({
+    competitorId,
+    catalogId,
+    serviceName,
+    field,
+    oldValue,
+    newValue,
+    changedAt: now,
+  });
 }

@@ -1,0 +1,14 @@
+{
+  "Query": {
+    "searchHistory": "UNKNOWN",
+    "liteLocation": "UNKNOWN",
+    "location": "UNKNOWN",
+    "locales": "UNKNOWN",
+    "geolocation": "UNKNOWN",
+    "locations": "UNKNOWN",
+    "location { ... }": "UNKNOWN",
+    "searchHistoryV3": "UNKNOWN",
+    "searchHistoryV2": "UNKNOWN"
+  },
+  "Geolocation": {}
+}
